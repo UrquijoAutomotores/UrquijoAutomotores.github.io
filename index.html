@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urquijo Automotores | Venta de Autos Usados y 0KM</title>
+    <!-- Favicon Premium -->
+    <link rel="icon" href="favicon.png" type="image/png" />
+
+    <!-- Preload Hero Image para mayor velocidad -->
+    <link rel="preload" as="image"
+        href="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=60">
+
+    <meta name="description"
+        content="Urquijo Automotores, tu concesionaria de confianza. Encontrá el mejor stock de vehículos usados seleccionados y 0KM en General Belgrano y toda la Provincia de Buenos Aires.">
+    <meta name="keywords"
+        content="concesionaria, autos usados, venta de autos, 0km, Urquijo Automotores, autos seminuevos, comprar auto, financiar auto, General Belgrano, Buenos Aires">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Urquijo Automotores | Venta de Autos Usados y 0KM">
+    <meta property="og:description"
+        content="Encontrá el mejor stock de vehículos usados y 0KM en General Belgrano y toda la Provincia de Buenos Aires.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoDealer",
+      "name": "Urquijo Automotores",
+      "description": "Concesionaria de autos usados seleccionados y 0km en General Belgrano y provincia de Buenos Aires.",
+      "telephone": "+54 9 2241 692356",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "General Belgrano",
+        "addressRegion": "Buenos Aires",
+        "addressCountry": "AR"
+      }
+    }
+    </script>
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f4f6f8',
+                            100: '#e5e9ef',
+                            200: '#cacee0',
+                            300: '#a3a9c5',
+                            400: '#7a81a5',
+                            500: '#565f8a',
+                            600: '#424a71',
+                            700: '#333a5b',
+                            800: '#272d47',
+                            900: '#151828', // Very dark slate, almost black, premium feel
+                        },
+                        accent: {
+                            500: '#E63946', // Vibrant sophisticated red
+                            600: '#D62828',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass {
+                @apply bg-white/80 backdrop-blur-xl border border-white/20;
+            }
+            .glass-dark {
+                @apply bg-brand-900/60 backdrop-blur-md border border-white/10;
+            }
+        }
+
+        body {
+            @apply text-brand-800 bg-brand-50 antialiased selection:bg-accent-500 selection:text-white;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Micro-animaciones */
+        .hover-lift {
+            @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl shadow-brand-900/10;
+        }
+        
+        .img-zoom-container {
+            @apply overflow-hidden rounded-t-2xl;
+        }
+        .img-zoom {
+            @apply w-full h-full object-cover transition-transform duration-700 hover:scale-110;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <!-- Navegacion -->
+    <nav class="fixed w-full z-50 transition-all duration-300 py-4 glass" id="navbar">
+        <div class="container mx-auto px-6 max-w-7xl flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex flex-col justify-center items-center group">
+                <div class="flex flex-col items-center">
+                    <span
+                        class="font-display font-black tracking-widest text-2xl text-brand-900 uppercase leading-none">URQUIJO</span>
+                    <div class="flex items-center gap-2 mt-1 w-full justify-center">
+                        <div class="h-[2px] w-4 sm:w-6 bg-accent-500 rounded-full"></div>
+                        <span
+                            class="font-sans font-medium tracking-[0.1em] text-[8px] sm:text-[9px] text-brand-900 uppercase leading-none">Automotores</span>
+                        <div class="h-[2px] w-4 sm:w-6 bg-accent-500 rounded-full"></div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Links de Escritorio -->
+            <ul class="hidden md:flex items-center gap-10">
+                <li><a href="#inicio" class="text-sm font-medium hover:text-accent-500 transition-colors">Inicio</a>
+                </li>
+                <li><a href="#inventario"
+                        class="text-sm font-medium hover:text-accent-500 transition-colors">Inventario</a></li>
+                <li><a href="#servicios"
+                        class="text-sm font-medium hover:text-accent-500 transition-colors">Servicios</a></li>
+                <li><a href="https://www.google.com/maps/place/Urquijo+Automotores/@-35.7746534,-58.4924802,19.75z/data=!4m6!3m5!1s0x9597f113eb2eae73:0x924d1eb2461a8de5!8m2!3d-35.7747572!4d-58.4925601!16s%2Fg%2F11cmz2pg50"
+                        target="_blank" class="text-sm font-medium hover:text-accent-500 transition-colors">Nuestra
+                        Ubicación</a></li>
+            </ul>
+
+            <!-- CTA / Contact -->
+            <div class="hidden md:flex items-center gap-6">
+                <a href="#contacto"
+                    class="text-sm font-semibold text-brand-900 hover:text-accent-500 transition-colors">Contacto</a>
+                <a href="https://wa.me/5492241692356" target="_blank"
+                    class="bg-brand-900 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-brand-800 hover:shadow-lg transition-all active:scale-95 flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Asesoría
+                </a>
+            </div>
+
+            <!-- Boton Menu Movil -->
+            <button class="md:hidden text-brand-900 text-2xl focus:outline-none"
+                onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-full left-0 w-full glass shadow-xl py-6 px-6 flex flex-col gap-4 border-t border-gray-100">
+            <a href="#inicio" class="text-lg font-medium p-2 hover:bg-brand-50 rounded-lg">Inicio</a>
+            <a href="#inventario" class="text-lg font-medium p-2 hover:bg-brand-50 rounded-lg">Inventario</a>
+            <a href="#servicios" class="text-lg font-medium p-2 hover:bg-brand-50 rounded-lg">Servicios</a>
+            <a href="https://www.google.com/maps/place/Urquijo+Automotores/@-35.7746534,-58.4924802,19.75z/data=!4m6!3m5!1s0x9597f113eb2eae73:0x924d1eb2461a8de5!8m2!3d-35.7747572!4d-58.4925601!16s%2Fg%2F11cmz2pg50"
+                target="_blank" class="text-lg font-medium p-2 hover:bg-brand-50 rounded-lg">Nuestra Ubicación</a>
+            <a href="#contacto" class="text-lg font-medium p-2 hover:bg-brand-50 rounded-lg">Contacto</a>
+            <a href="https://wa.me/5492241692356" target="_blank"
+                class="bg-brand-900 text-white text-center px-6 py-3 rounded-xl font-medium mt-2 flex justify-center items-center gap-2">
+                <i class="fab fa-whatsapp"></i> Contactar Asesor
+            </a>
+        </div>
+    </nav>
+
+    <!-- Seccion Hero -->
+    <header id="inicio" class="relative h-[95vh] flex items-center justify-center overflow-hidden">
+        <!-- Imagen de Fondo -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=60"
+                alt="Mercedes Benz" fetchpriority="high" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-900/90 via-brand-900/60 to-transparent"></div>
+        </div>
+
+        <div class="container mx-auto px-6 max-w-7xl relative z-10 flex flex-col md:flex-row items-center pt-20">
+            <!-- Text Content -->
+            <div class="w-full md:w-3/5 text-white opacity-0 animate-fade-in-up">
+                <span
+                    class="inline-block py-1 px-3 rounded-full border border-white/30 text-xs font-semibold tracking-widest uppercase mb-6 backdrop-blur-sm">
+                    Colección Exclusiva
+                </span>
+                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight mb-8">
+                    El arte de <br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">conducir.</span>
+                </h1>
+                <p class="text-lg md:text-xl font-light text-gray-300 max-w-lg mb-12">
+                    Descubra nuestra selección premium. Unidades rigurosamente inspeccionadas para garantizar la
+                    excelencia que usted merece.
+                </p>
+
+                <!-- Barra de Busqueda -->
+                <div
+                    class="glass flex flex-col sm:flex-row items-center p-2 rounded-2xl md:rounded-full max-w-4xl gap-2 shadow-2xl">
+                    <div class="w-full relative px-4 py-2 border-b sm:border-b-0 sm:border-r border-gray-200">
+                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Buscar Modelo</label>
+                        <input type="text" id="search-input" placeholder="Ej. Territory"
+                            class="w-full bg-transparent text-brand-900 font-medium outline-none placeholder:font-normal placeholder:text-gray-400">
+                    </div>
+                    <div class="w-full relative px-4 py-2 border-b sm:border-b-0 sm:border-r border-gray-200">
+                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Marca</label>
+                        <select id="brand-select"
+                            class="w-full bg-transparent text-brand-900 font-medium outline-none cursor-pointer appearance-none">
+                            <option value="Todas">Todas</option>
+                        </select>
+                        <i
+                            class="fas fa-chevron-down absolute right-4 top-1/2 text-xs text-gray-400 pointer-events-none"></i>
+                    </div>
+                    <div class="w-full relative px-4 py-2">
+                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Condición</label>
+                        <select id="condition-select"
+                            class="w-full bg-transparent text-brand-900 font-medium outline-none cursor-pointer appearance-none">
+                            <option value="Todos">Todos</option>
+                            <option value="Nuevos">Nuevos</option>
+                            <option value="Usados">Usados</option>
+                        </select>
+                        <i
+                            class="fas fa-chevron-down absolute right-4 top-1/2 text-xs text-gray-400 pointer-events-none"></i>
+                    </div>
+                    <button id="search-btn"
+                        class="w-full sm:w-auto bg-accent-500 text-white rounded-xl sm:rounded-full px-8 py-4 font-semibold hover:bg-accent-600 transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-search text-sm"></i> <span class="sm:hidden">Buscar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Inventario Destacado -->
+    <section id="inventario" class="py-24 relative overflow-hidden bg-brand-900">
+        <!-- Efectos de Fondo Minimalistas -->
+        <div class="absolute inset-0 z-0 opacity-10"
+            style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 32px 32px;"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-900/80 to-brand-900 z-0"></div>
+        <div
+            class="absolute top-1/4 right-0 -mr-40 w-[40rem] h-[40rem] rounded-full bg-accent-500/10 blur-[100px] pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 -ml-40 w-[40rem] h-[40rem] rounded-full bg-blue-500/10 blur-[100px] pointer-events-none">
+        </div>
+
+        <div class="container mx-auto px-6 max-w-7xl relative z-10">
+            <!-- Encabezado de Sección -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+                        Selección<br>Destacada</h2>
+                    <div class="h-1 w-20 bg-accent-500 rounded-full"></div>
+                </div>
+                <p class="text-gray-400 max-w-sm md:text-right">Vehículos que redefinen los estándares de calidad.
+                    Encuentra tu próxima experiencia de conducción.</p>
+            </div>
+
+            <!-- Grid -->
+            <div id="inventory-grid"
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-opacity duration-300">
+                <!-- Los vehículos se cargarán dinámicamente mediante JavaScript -->
+            </div>
+
+            <div class="mt-16 text-center">
+                <a href="#" id="load-more-btn"
+                    class="inline-flex items-center gap-3 font-semibold text-white bg-accent-500 px-8 py-4 rounded-full hover:bg-accent-600 transition-all shadow-lg hover:shadow-accent-500/30 hover:-translate-y-1">
+                    Explorar inventario completo <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios / Beneficios -->
+    <section id="servicios" class="py-24 bg-white border-t border-gray-100">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-brand-900 mb-6 tracking-tight">Experiencia
+                    Premium</h2>
+                <p class="text-brand-400">No solo vendemos autos, construimos relaciones de confianza. Ofrecemos un
+                    servicio integral para que su compra sea perfecta.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-center max-w-4xl mx-auto">
+                <div class="p-6 transition-all duration-300 hover:-translate-y-2">
+                    <div
+                        class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl text-accent-500 shadow-sm border border-red-50">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-brand-900 mb-3">Financiación Flexible</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Trabajamos con las mejores entidades financieras
+                        para ofrecerle tasas preferenciales y planes a su medida.</p>
+                </div>
+                <div class="p-6 transition-all duration-300 hover:-translate-y-2">
+                    <div
+                        class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl text-brand-900 shadow-sm">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-brand-900 mb-3">Gestoría Integral</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Nos ocupamos de todos los trámites, transferencias
+                        y seguros para que usted solo se preocupe por conducir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-brand-900 text-white border-b-4 border-accent-500">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h2 class="font-display text-3xl md:text-5xl font-bold mb-6">¿Listo para su nuevo vehículo?</h2>
+            <p class="text-gray-400 mb-10 max-w-xl mx-auto">Visítenos en nuestra agencia o contactenos via WhatsApp.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://www.google.com/maps/place/Urquijo+Automotores/@-35.7746534,-58.4924802,19.75z/data=!4m6!3m5!1s0x9597f113eb2eae73:0x924d1eb2461a8de5!8m2!3d-35.7747572!4d-58.4925601!16s%2Fg%2F11cmz2pg50?entry=ttu&g_ep=EgoyMDI2MDMyMi4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    class="bg-white text-brand-900 font-bold px-8 py-4 rounded-xl hover:bg-gray-100 transition-colors">
+                    Ver Ubicación en Maps
+                </a>
+                <a href="https://wa.me/5492241692356" target="_blank"
+                    class="bg-accent-500 text-white font-bold px-8 py-4 rounded-xl hover:bg-accent-600 transition-colors flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp text-xl"></i> Contactar por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de Página -->
+    <footer id="contacto" class="bg-white pt-20 pb-10 border-t border-gray-100 mt-auto">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
+                <!-- Branding -->
+                <div class="border-b lg:border-none border-gray-100 pb-8 lg:pb-0 flex lg:justify-center">
+                    <div class="w-full max-w-xs">
+                        <a href="index.html" class="flex flex-col justify-start items-start group mb-6">
+                            <div class="flex flex-col items-center w-32 sm:w-40">
+                                <span
+                                    class="font-display font-black tracking-widest text-3xl sm:text-4xl text-brand-900 uppercase leading-none">URQUIJO</span>
+                                <div class="flex items-center gap-2 mt-2 w-full justify-center">
+                                    <div class="h-[2px] w-6 sm:w-8 bg-accent-500 rounded-full"></div>
+                                    <span
+                                        class="font-sans font-medium tracking-[0.1em] text-[10px] sm:text-xs text-brand-900 uppercase leading-none">Automotores</span>
+                                    <div class="h-[2px] w-6 sm:w-8 bg-accent-500 rounded-full"></div>
+                                </div>
+                            </div>
+                        </a>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                            Desde 1998 nos dedicamos a la venta de autos 0KM y Usados
+                            Una amplia trayectoria nos avala en el rubro.
+                        </p>
+                        <div class="flex gap-4 justify-center sm:justify-start w-full">
+                            <a href="https://www.instagram.com/urquijo.automotores/" target="_blank"
+                                class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-brand-900 hover:text-brand-900 transition-colors">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.facebook.com/ignacio.urquijo.100" target="_blank"
+                                class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-brand-900 hover:text-brand-900 transition-colors">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enlaces -->
+                <div class="flex lg:justify-center">
+                    <div class="w-full max-w-xs">
+                        <h4 class="font-display font-bold text-lg text-brand-900 mb-6">Enlaces Rápidos</h4>
+                        <ul class="space-y-4">
+                            <li><a href="#inicio"
+                                    class="text-gray-500 hover:text-accent-500 text-sm transition-colors">Inicio</a>
+                            </li>
+                            <li><a href="#inventario"
+                                    class="text-gray-500 hover:text-accent-500 text-sm transition-colors">Inventario</a>
+                            </li>
+                            <li><a href="#servicios"
+                                    class="text-gray-500 hover:text-accent-500 text-sm transition-colors">Servicios</a>
+                            </li>
+                            <li><a href="#"
+                                    class="text-gray-500 hover:text-accent-500 text-sm transition-colors">Nosotros</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contacto -->
+                <div class="flex lg:justify-center">
+                    <div class="w-full xl:max-w-xl">
+                        <h4 class="font-display font-bold text-lg text-brand-900 mb-6">Contacto & Ubicación</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center text-accent-500 shrink-0">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-brand-900 text-sm mb-1">Nuestra Agencia</h5>
+                                    <p class="text-sm text-gray-500">Av Italia n°894<br>General Belgrano, Provincia De
+                                        Buenos
+                                        Aires</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center text-accent-500 shrink-0">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-brand-900 text-sm mb-1">Horarios</h5>
+                                    <p class="text-sm text-gray-500">Lunes - Viernes: 9:00 a 12:30 y 16:00 a 20:00
+                                        hrs<br>Sabado:
+                                        09:00 a 12:30 hs
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center text-accent-500 shrink-0">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-brand-900 text-sm mb-1">Teléfonos</h5>
+                                    <p class="text-sm text-gray-500"><br><a href="https://wa.me/5492241692356"
+                                            class="text-accent-500 font-medium hover:underline">+54 9 2241 692356
+                                            (WhatsApp)</a></p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center text-accent-500 shrink-0">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-brand-900 text-sm mb-1">Email</h5>
+                                    <p class="text-sm text-gray-500">
+                                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=urquijoautomotores@gmail.com"
+                                            target="_blank"
+                                            class="hover:text-accent-500 hover:underline transition-colors">urquijoautomotores@gmail.com</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-gray-400">&copy; 2026 Urquijo Automotores. Todos los derechos reservados.</p>
+                <div class="flex gap-4 text-xs text-gray-400">
+                    <a href="terminos.html" class="hover:text-brand-900 transition-colors">Términos y Condiciones</a>
+                    <a href="privacidad.html" class="hover:text-brand-900 transition-colors">Política de Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/5492241692356" target="_blank"
+        class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 text-white rounded-full flex justify-center items-center text-3xl shadow-[0_10px_30px_rgba(34,197,94,0.4)] hover:scale-110 hover:bg-green-600 transition-all z-50">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="data.js" defer></script>
+    <script src="app.js" defer></script>
+</body>
+
+</html>

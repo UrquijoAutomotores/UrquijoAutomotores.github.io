@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urquijo Automotores | Detalles del Vehículo</title>
+    <link rel="icon" href="favicon.png" type="image/png" />
+    <meta name="description"
+        content="Conocé en detalle este vehículo de Urquijo Automotores. Calidad, garantía y la mejor financiación en General Belgrano y toda la provincia.">
+    <meta name="keywords"
+        content="concesionaria, autos usados, venta de autos, 0km, Urquijo Automotores, autos seminuevos, comprar auto, financiar auto, General Belgrano, Buenos Aires">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Urquijo Automotores | Detalles del Vehículo">
+    <meta property="og:description"
+        content="Conocé las características, año, kilometraje y más de este increíble vehículo en el stock de Urquijo Automotores.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f4f6f8',
+                            100: '#e5e9ef',
+                            200: '#cacee0',
+                            300: '#a3a9c5',
+                            400: '#7a81a5',
+                            500: '#565f8a',
+                            600: '#424a71',
+                            700: '#333a5b',
+                            800: '#272d47',
+                            900: '#151828',
+                        },
+                        accent: {
+                            500: '#E63946',
+                            600: '#D62828',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass {
+                @apply bg-white/80 backdrop-blur-xl border border-white/20;
+            }
+            .glass-dark {
+                @apply bg-brand-900/80 backdrop-blur-xl border border-white/10;
+            }
+        }
+
+        body {
+            @apply text-brand-900 bg-white antialiased selection:bg-accent-500 selection:text-white;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen relative bg-brand-50">
+    <!-- Efectos de Fondo Minimalistas -->
+    <div class="fixed inset-0 z-[-1] opacity-5"
+        style="background-image: radial-gradient(#000000 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="fixed inset-0 bg-gradient-to-b from-transparent via-white/80 to-white z-[-1]"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 py-3 glass shadow-sm border-b border-gray-100"
+        id="navbar">
+        <div class="container mx-auto px-4 lg:px-6 max-w-7xl flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex flex-col justify-center items-center group">
+                <div class="flex flex-col items-center">
+                    <span
+                        class="font-display font-black tracking-widest text-2xl text-brand-900 uppercase leading-none">URQUIJO</span>
+                    <div class="flex items-center gap-2 mt-1 w-full justify-center">
+                        <div class="h-[2px] w-4 sm:w-6 bg-accent-500 rounded-full"></div>
+                        <span
+                            class="font-sans font-medium tracking-[0.1em] text-[8px] sm:text-[9px] text-brand-900 uppercase leading-none">Automotores</span>
+                        <div class="h-[2px] w-4 sm:w-6 bg-accent-500 rounded-full"></div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <ul class="hidden md:flex items-center gap-10">
+                <li><a href="index.html#inicio"
+                        class="text-sm font-medium text-gray-500 hover:text-accent-500 transition-colors">Inicio</a>
+                </li>
+                <li><a href="index.html#inventario"
+                        class="text-sm font-medium text-brand-900 pb-1 border-b-2 border-accent-500 transition-colors">Inventario</a>
+                </li>
+                <li><a href="index.html#servicios"
+                        class="text-sm font-medium text-gray-500 hover:text-accent-500 transition-colors">Servicios</a>
+                </li>
+                <li><a href="https://www.google.com/maps/place/Urquijo+Automotores/@-35.7746534,-58.4924802,19.75z/data=!4m6!3m5!1s0x9597f113eb2eae73:0x924d1eb2461a8de5!8m2!3d-35.7747572!4d-58.4925601!16s%2Fg%2F11cmz2pg50"
+                        target="_blank"
+                        class="text-sm font-medium text-gray-500 hover:text-accent-500 transition-colors">Nuestra
+                        Ubicación</a></li>
+            </ul>
+
+            <!-- CTA -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://wa.me/5492241692356" target="_blank"
+                    class="bg-brand-900 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-brand-800 hover:shadow-lg transition-all active:scale-95 flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Asesoría
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-brand-900 text-2xl focus:outline-none"
+                onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-full left-0 w-full glass-dark shadow-xl py-6 px-6 flex flex-col gap-4 border-t border-white/10">
+            <a href="index.html#inicio"
+                class="text-lg font-medium p-2 text-white hover:bg-brand-800 rounded-lg">Inicio</a>
+            <a href="index.html#inventario"
+                class="text-lg font-medium p-2 text-white hover:bg-brand-800 rounded-lg">Inventario</a>
+            <a href="https://www.google.com/maps/place/Urquijo+Automotores/@-35.7746534,-58.4924802,19.75z/data=!4m6!3m5!1s0x9597f113eb2eae73:0x924d1eb2461a8de5!8m2!3d-35.7747572!4d-58.4925601!16s%2Fg%2F11cmz2pg50"
+                target="_blank" class="text-lg font-medium p-2 text-white hover:bg-brand-800 rounded-lg">Nuestra
+                Ubicación</a>
+            <a href="https://wa.me/5492241692356" target="_blank"
+                class="bg-accent-500 text-white text-center px-6 py-3 rounded-xl font-medium mt-2 flex justify-center items-center gap-2">
+                <i class="fab fa-whatsapp"></i> Contactar Asesor
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-24 pb-12 relative z-10 flex flex-col justify-center" id="car-detail-container">
+        <!-- Loader / Fallback content before JS executes -->
+        <div class="container mx-auto px-6 max-w-7xl animate-pulse">
+            <div class="h-8 bg-brand-800 rounded w-1/4 mb-8"></div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="h-96 bg-brand-800 rounded-3xl"></div>
+                <div>
+                    <div class="h-12 bg-brand-800 rounded w-3/4 mb-4"></div>
+                    <div class="h-8 bg-brand-800 rounded w-1/4 mb-8"></div>
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="h-20 bg-brand-800 rounded-xl"></div>
+                        <div class="h-20 bg-brand-800 rounded-xl"></div>
+                        <div class="h-20 bg-brand-800 rounded-xl"></div>
+                        <div class="h-20 bg-brand-800 rounded-xl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal"
+        class="fixed inset-0 z-[100] bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <button onclick="closeLightbox()"
+            class="absolute top-6 right-6 text-white/70 hover:text-white text-3xl z-[110] transition-colors"><i
+                class="fas fa-times"></i></button>
+        <button id="lightbox-prev" onclick="prevLightboxImage(event)"
+            class="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-5xl z-[110] transition-colors hidden"><i
+                class="fas fa-chevron-left"></i></button>
+        <button id="lightbox-next" onclick="nextLightboxImage(event)"
+            class="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-5xl z-[110] transition-colors hidden"><i
+                class="fas fa-chevron-right"></i></button>
+        <img id="lightbox-img" src=""
+            class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300 relative z-[105]">
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 pt-6 pb-4 relative z-10 mt-auto shadow-inner">
+        <div class="container mx-auto px-6 max-w-7xl flex flex-col items-center text-center">
+            <a href="index.html" class="flex flex-col justify-center items-center group mb-2">
+                <div class="flex flex-col items-center w-full">
+                    <span
+                        class="font-display font-black tracking-widest text-2xl text-brand-900 uppercase leading-none">URQUIJO</span>
+                    <div class="flex items-center gap-2 mt-1 w-full justify-center">
+                        <div class="h-[2px] w-4 sm:w-6 bg-accent-500 rounded-full"></div>
+                        <span
+                            class="font-sans font-medium tracking-[0.1em] text-[8px] sm:text-[9px] text-brand-900 uppercase leading-none">Automotores</span>
+                        <div class="h-[2px] w-4 sm:w-6 bg-accent-500 rounded-full"></div>
+                    </div>
+                </div>
+            </a>
+            <p class="text-gray-500 text-xs mt-2">Donde los sueños se cumplen.</p>
+            <div class="pt-4 mt-3 flex justify-center items-center gap-4 w-full border-t border-gray-100 flex-wrap">
+                <div class="flex gap-3 text-xs text-gray-400 items-center">
+                    <a href="terminos.html" class="hover:text-brand-900 transition-colors">Términos y Condiciones</a>
+                    <span>|</span>
+                    <a href="privacidad.html" class="hover:text-brand-900 transition-colors">Política de Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/5492241692356" target="_blank"
+        class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 text-white rounded-full flex justify-center items-center text-3xl shadow-[0_10px_30px_rgba(34,197,94,0.4)] hover:scale-110 hover:bg-green-600 transition-all z-50">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="data.js" defer></script>
+    <script src="app.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Obtener el ID de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            let carId = parseInt(urlParams.get('id'));
+
+            // Si no hay ID (al abrir el archivo directamente), cargar el primer vehículo por defecto para poder previsualizar
+            if (isNaN(carId)) {
+                carId = 1;
+            }
+
+            const container = document.getElementById('car-detail-container');
+
+            // Find the car
+            const car = typeof inventoryData !== 'undefined' ? inventoryData.find(c => c.id === carId) : null;
+
+            if (!car) {
+                container.innerHTML = `
+                    <div class="container mx-auto px-6 max-w-7xl text-center py-24">
+                        <i class="fas fa-exclamation-triangle text-6xl text-brand-700 mb-6"></i>
+                        <h1 class="text-3xl font-bold text-white mb-4">Vehículo no encontrado</h1>
+                        <p class="text-gray-400 mb-8">El vehículo que buscas no existe o ha sido removido del inventario.</p>
+                        <a href="index.html" class="bg-accent-500 text-white px-8 py-4 rounded-xl font-semibold hover:bg-accent-600 transition-colors inline-block">Volver al Inventario</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Render car details
+            document.title = `${car.brand} ${car.model} | Urquijo Automotores`;
+
+            // Setup Wahtsapp message
+            const waMessage = encodeURIComponent(`Hola! Quisiera más información sobre el ${car.brand} ${car.model} ${car.trim} (${car.year}) publicado a ${car.price}.`);
+
+            container.innerHTML = `
+                <div class="container mx-auto px-6 max-w-7xl animate-fade-in-up">
+                    <a href="index.html#inventario" class="inline-flex items-center gap-2 text-gray-400 hover:text-accent-500 font-medium mb-4 transition-colors">
+                        <i class="fas fa-arrow-left"></i> Volver al inventario
+                    </a>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Image Gallery Area -->
+                        <div class="space-y-4">
+                            <div class="relative h-[350px] md:h-[400px] rounded-3xl overflow-hidden shadow-sm group border border-gray-200 bg-white">
+                                ${car.status ? `<span class="absolute top-4 left-4 z-10 ${car.available ? 'bg-accent-500' : 'bg-brand-900'} text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md">${car.status}</span>` : ''}
+                                <img id="main-image" src="${car.gallery && car.gallery.length > 0 ? car.gallery[0] : car.image}" alt="${car.brand} ${car.model}" fetchpriority="high" class="w-full h-full object-cover transition-all duration-300">
+                                
+                                <button onclick="openLightbox()" class="absolute top-4 right-4 z-10 bg-white/90 text-brand-900 w-10 h-10 rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white border border-gray-200"><i class="fas fa-expand-arrows-alt"></i></button>
+
+                                ${car.gallery && car.gallery.length > 1 ? `
+                                <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 text-brand-900 w-10 h-10 rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white border border-gray-200 z-20"><i class="fas fa-chevron-left"></i></button>
+                                <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 text-brand-900 w-10 h-10 rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white border border-gray-200 z-20"><i class="fas fa-chevron-right"></i></button>
+                                ` : ''}
+                            </div>
+                            
+                            ${car.gallery && car.gallery.length > 1 ? `
+                            <div class="flex gap-3 overflow-x-auto pb-2 custom-scrollbar hide-scrollbar">
+                                ${car.gallery.map((img, index) => `
+                                    <button onclick="changeImage(${index})" class="relative shrink-0 w-24 h-16 rounded-xl overflow-hidden border-2 transition-all duration-300 ${index === 0 ? 'border-accent-500 opacity-100' : 'border-transparent opacity-60 hover:opacity-100'} thumbnail-btn shadow-sm">
+                                        <img src="${img}" class="w-full h-full object-cover">
+                                    </button>
+                                `).join('')}
+                            </div>
+                            ` : ''}
+                        </div>
+
+                        <!-- Details Area -->
+                        <div class="flex flex-col">
+                            <div class="mb-4">
+                                <span class="text-accent-500 font-bold uppercase tracking-wider text-xs">${car.condition}</span>
+                                <h1 class="font-display text-3xl md:text-5xl font-black text-brand-900 mt-1 mb-1 leading-tight tracking-tight">
+                                    ${car.brand} ${car.model} <span class="text-xl md:text-2xl text-gray-500 font-medium block mt-1">${car.trim}</span>
+                                </h1>
+                                <div class="text-2xl font-bold text-accent-500 mt-2">${car.price}</div>
+                            </div>
+
+                            <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                                ${car.description || 'Vehículo en excelentes condiciones, revisado rigurosamente por nuestros especialistas para garantizar la máxima calidad.'}
+                            </p>
+
+                            <!-- Quick Stats -->
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                                <div class="bg-white border border-gray-100 p-4 rounded-2xl flex flex-col items-center justify-center text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow">
+                                    <div class="w-10 h-10 bg-brand-50 rounded-full flex items-center justify-center mb-2">
+                                        <i class="fas fa-calendar-alt text-brand-900"></i>
+                                    </div>
+                                    <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Año</span>
+                                    <span class="font-bold text-brand-900 mt-0.5">${car.year}</span>
+                                </div>
+                                <div class="bg-white border border-gray-100 p-4 rounded-2xl flex flex-col items-center justify-center text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow">
+                                    <div class="w-10 h-10 bg-brand-50 rounded-full flex items-center justify-center mb-2">
+                                        <i class="fas fa-road text-brand-900"></i>
+                                    </div>
+                                    <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Kilometros</span>
+                                    <span class="font-bold text-brand-900 mt-0.5">${car.km}</span>
+                                </div>
+                                <div class="bg-white border border-gray-100 p-4 rounded-2xl flex flex-col items-center justify-center text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow">
+                                    <div class="w-10 h-10 bg-brand-50 rounded-full flex items-center justify-center mb-2">
+                                        <i class="fas fa-gas-pump ${car.fuel === 'Híbrido' ? 'text-accent-500' : 'text-brand-900'}"></i>
+                                    </div>
+                                    <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Combustible</span>
+                                    <span class="font-bold text-brand-900 mt-0.5">${car.fuel}</span>
+                                </div>
+                            </div>
+
+                            <!-- Features -->
+                            <div class="mb-8">
+                                <h3 class="font-display text-lg font-bold text-brand-900 mb-3 border-b border-gray-100 pb-2">Equipamiento Destacado</h3>
+                                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
+                                    ${car.features && car.features.length > 0 ? car.features.map(f => `<li class="flex items-center gap-2"><i class="fas fa-check text-accent-500 text-xs"></i> ${f}</li>`).join('') : '<li class="italic text-gray-400">Consultar por equipamiento específico</li>'}
+                                </ul>
+                            </div>
+
+                            <!-- CTA -->
+                            <div class="mt-auto">
+                                <a href="https://wa.me/5492241692356?text=${waMessage}" target="_blank" class="w-full bg-accent-500 text-white font-bold py-3.5 px-6 rounded-xl hover:bg-accent-600 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-accent-500/20 hover:-translate-y-1">
+                                    <i class="fab fa-whatsapp text-xl"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Configurar lógica del carrusel después de inyectar el HTML
+            if (car.gallery && car.gallery.length > 1) {
+                window.currentGallery = car.gallery;
+                window.currentImageIndex = 0;
+
+                window.changeImage = function (index) {
+                    window.currentImageIndex = index;
+                    const mainImg = document.getElementById('main-image');
+                    mainImg.style.opacity = '0.4';
+
+                    setTimeout(() => {
+                        mainImg.src = window.currentGallery[index];
+                        mainImg.style.opacity = '1';
+                    }, 150);
+
+                    // Actualizar thumbnails
+                    document.querySelectorAll('.thumbnail-btn').forEach((btn, i) => {
+                        if (i === index) {
+                            btn.classList.add('border-accent-500', 'opacity-100');
+                            btn.classList.remove('border-transparent', 'opacity-60');
+                        } else {
+                            btn.classList.remove('border-accent-500', 'opacity-100');
+                            btn.classList.add('border-transparent', 'opacity-60');
+                        }
+                    });
+                };
+
+                window.prevImage = function () {
+                    if (!window.currentGallery) return;
+                    let newIndex = window.currentImageIndex - 1;
+                    if (newIndex < 0) newIndex = window.currentGallery.length - 1;
+                    window.changeImage(newIndex);
+                };
+
+                window.nextImage = function () {
+                    if (!window.currentGallery) return;
+                    let newIndex = window.currentImageIndex + 1;
+                    if (newIndex >= window.currentGallery.length) newIndex = 0;
+                    window.changeImage(newIndex);
+                };
+            }
+        });
+
+        // Lightbox functions
+        function openLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const mainImg = document.getElementById('main-image');
+
+            if (!mainImg) return;
+
+            lightboxImg.src = mainImg.src;
+
+            // Show/hide navigation arrows
+            const prevBtn = document.getElementById('lightbox-prev');
+            const nextBtn = document.getElementById('lightbox-next');
+            if (window.currentGallery && window.currentGallery.length > 1) {
+                if (prevBtn) prevBtn.classList.remove('hidden');
+                if (nextBtn) nextBtn.classList.remove('hidden');
+            } else {
+                if (prevBtn) prevBtn.classList.add('hidden');
+                if (nextBtn) nextBtn.classList.add('hidden');
+            }
+
+            modal.classList.remove('hidden');
+            // Force reflow
+            void modal.offsetWidth;
+            modal.classList.remove('opacity-0');
+            lightboxImg.classList.remove('scale-95');
+            lightboxImg.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            const lightboxImg = document.getElementById('lightbox-img');
+
+            modal.classList.add('opacity-0');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        function prevLightboxImage(e) {
+            if (e) e.stopPropagation();
+            if (window.prevImage && window.currentGallery) {
+                window.prevImage();
+                document.getElementById('lightbox-img').src = window.currentGallery[window.currentImageIndex];
+            }
+        }
+
+        function nextLightboxImage(e) {
+            if (e) e.stopPropagation();
+            if (window.nextImage && window.currentGallery) {
+                window.nextImage();
+                document.getElementById('lightbox-img').src = window.currentGallery[window.currentImageIndex];
+            }
+        }
+    </script>
+</body>
+
+</html>
