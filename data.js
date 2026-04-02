@@ -36,8 +36,8 @@ const inventoryData = [
             './Autos Pagina/Corsa 2015/Corsa 2.webp',
             './Autos Pagina/Corsa 2015/Corsa 3.webp'
         ],
-        status: 'Disponible',
-        available: true,
+        status: 'Vendido',
+        available: false,
         description: 'El Chevrolet Corsa Classic LS 2015 es un referente de confiabilidad y economía en el segmento de entrada. Equipado con el motor 1.4L de 90 CV, se destaca por su bajo consumo de combustible y costos de mantenimiento reducidos, ideal para la ciudad.',
         features: ['Dirección asistida', 'Aire acondicionado', 'Doble airbag frontal', 'Frenos ABS', 'Llantas de acero con tazas']
     },
