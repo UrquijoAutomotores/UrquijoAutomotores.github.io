@@ -199,3 +199,13 @@ const inventoryData = [
         features: ['Motor 1.6L HDI de 115 CV', 'Transmisión manual de 5 velocidades', 'Frenos ABS con EBD', 'Doble airbag frontal', 'Aire acondicionado', 'Levantacristales eléctricos', 'Cierre centralizado con comando a distancia', 'Llantas de aleación ligera de 16"', 'Apoyabrazos central delantero', 'Sistema de alarma antirrobo', 'Sensor de estacionamiento trasero', 'Espejos retrovisores eléctricos', 'Levantacristales eléctricos con función "one-touch"']
     },
 ];
+
+// Función para generar URLs amigables
+const getCarSlug = (car) => {
+    return `${car.brand}-${car.model}-${car.id}`
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Quitar acentos
+        .replace(/[^a-z0-9-]/g, "-") // Reemplazar caracteres raros por guiones
+        .replace(/-+/g, "-") // Evitar guiones dobles
+        .replace(/^-|-$/g, ""); // Quitar guiones extra al principio o final
+};

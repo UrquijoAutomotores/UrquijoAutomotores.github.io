@@ -230,9 +230,19 @@
     <script src="app.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Obtener el ID de la URL
+            // Obtener el ID de la URL (nueva lógica con SLUG o fallback a ID viejo)
             const urlParams = new URLSearchParams(window.location.search);
-            let carId = parseInt(urlParams.get('id'));
+            let autoSlug = urlParams.get('auto');
+            let carId;
+
+            if (autoSlug) {
+                // El ID es el último número después del guión (ej: ford-territory-4)
+                const parts = autoSlug.split('-');
+                carId = parseInt(parts[parts.length - 1]);
+            } else {
+                // Fallback por si alguien entra con un link viejo (?id=4)
+                carId = parseInt(urlParams.get('id'));
+            }
 
             // Si no hay ID (al abrir el archivo directamente), cargar el primer vehículo por defecto para poder previsualizar
             if (isNaN(carId)) {
@@ -258,6 +268,25 @@
 
             // Render car details
             document.title = `${car.brand} ${car.model} | Urquijo Automotores`;
+
+            // SEO Dinámico para que Google no lo marque como duplicado
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if(metaDesc) metaDesc.content = `Excelente ${car.brand} ${car.model} ${car.trim} del año ${car.year} con ${car.km} km. Conocé más detalles y precio en Urquijo Automotores.`;
+            
+            const ogTitle = document.querySelector('meta[property="og:title"]');
+            if(ogTitle) ogTitle.content = `${car.brand} ${car.model} | Urquijo Automotores`;
+            
+            const ogDesc = document.querySelector('meta[property="og:description"]');
+            if(ogDesc) ogDesc.content = `Mirá este ${car.brand} ${car.model} modelo ${car.year}. Ideal para vos, vení a verlo a General Belgrano.`;
+
+            // URL Canónica dinámica
+            let canonical = document.querySelector('link[rel="canonical"]');
+            if(!canonical) {
+                canonical = document.createElement('link');
+                canonical.rel = 'canonical';
+                document.head.appendChild(canonical);
+            }
+            canonical.href = `https://urquijoautomotores.github.io/detalle.html?auto=${getCarSlug(car)}`;
 
             // Setup Wahtsapp message
             const waMessage = encodeURIComponent(`Hola! Quisiera más información sobre el ${car.brand} ${car.model} ${car.trim} (${car.year}) publicado a ${car.price}.`);

@@ -1,81 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- SECCIÓN PRINCIPAL -->
   <url>
-    <loc>https://urquijoautomotores.github.io</loc>
+    <loc>https://urquijoautomotores.github.io/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
+  <!-- SECCIÓN DE AUTOS -->
   <url>
-    <loc>https://urquijoautomotores.github.io//</loc>
-    <lastmod>2026-03-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://urquijoautomotores.github.io/detalle.html?id=1</loc> 
+    <loc>https://urquijoautomotores.github.io/detalle.html?auto=ford-fiesta-kinetic-1</loc> <!-- El siguiente auto -->
     <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://urquijoautomotores.github.io/detalle.html?id=2</loc> 
+    <loc>https://urquijoautomotores.github.io/detalle.html?auto=chevrolet-corsa-classic-2</loc> <!-- El siguiente auto -->
     <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://urquijoautomotores.github.io/detalle.html?id=3</loc> 
+    <loc>https://urquijoautomotores.github.io/detalle.html?auto=renault-kwid-3</loc> <!-- El siguiente auto -->
     <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://urquijoautomotores.github.io/detalle.html?id=4</loc> 
+    <loc>https://urquijoautomotores.github.io/detalle.html?auto=ford-territory-4</loc> <!-- El siguiente auto -->
     <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://urquijoautomotores.github.io/detalle.html?id=5</loc>
+    <loc>https://urquijoautomotores.github.io/detalle.html?auto=volkswagen-gol-5</loc> <!-- El siguiente auto -->
     <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://urquijoautomotores.github.io/detalle.html?id=6</loc> 
+    <loc>https://urquijoautomotores.github.io/detalle.html?auto=fiat-strada-6</loc> <!-- El siguiente auto -->
     <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://urquijoautomotores.github.io/detalle.html?id=7</loc> 
+    <loc>https://urquijoautomotores.github.io/detalle.html?auto=fiat-uno-7</loc> <!-- El siguiente auto -->
     <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://urquijoautomotores.github.io/detalle.html?id=8</loc> 
+    <loc>https://urquijoautomotores.github.io/detalle.html?auto=volkswagen-up-8</loc> <!-- El siguiente auto -->
     <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://urquijoautomotores.github.io/detalle.html?id=9</loc> 
+    <loc>https://urquijoautomotores.github.io/detalle.html?auto=peugeot-308-1-6-hdi-9</loc> <!-- El siguiente auto -->
     <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://urquijoautomotores.com/terminos.html</loc>
+    <loc>https://urquijoautomotores.github.io/terminos.html</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://urquijoautomotores.com/privacidad.html</loc>
+    <loc>https://urquijoautomotores.github.io/privacidad.html</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

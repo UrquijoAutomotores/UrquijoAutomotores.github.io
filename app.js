@@ -93,7 +93,7 @@ function renderInventory(cars) {
                         </div>
                     </div>
                     ${car.available ? `
-                        <a href="detalle.html?id=${car.id}" class="w-full inline-flex justify-center items-center gap-2 bg-transparent border-2 border-brand-900 text-brand-900 font-semibold py-3 rounded-xl hover:bg-brand-900 hover:text-white transition-all">
+                        <a href="detalle.html?auto=${getCarSlug(car)}" class="w-full inline-flex justify-center items-center gap-2 bg-transparent border-2 border-brand-900 text-brand-900 font-semibold py-3 rounded-xl hover:bg-brand-900 hover:text-white transition-all">
                             Ver Detalles <i class="fas fa-arrow-right text-sm transition-transform group-hover:translate-x-1"></i>
                         </a>
                     ` : `
