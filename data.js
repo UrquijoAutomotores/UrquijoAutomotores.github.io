@@ -20,27 +20,7 @@ const inventoryData = [
         description: 'El Ford Fiesta Kinetic S Plus 2014 destaca por su atractivo y moderno diseño global. Equipado con el confiable motor 1.6L Sigma de 120 CV, ofrece un excelente equilibrio entre eficiencia y respuesta urbana, sumado a un completo nivel de equipamiento en confort y seguridad para su segmento.',
         features: ['Sistema de conectividad SYNC con control por voz', 'Llantas de aleación de 15"', 'Doble airbag frontal y frenos ABS', 'Aire acondicionado', 'Alzacristales y espejos eléctricos']
     },
-    {
-        id: 2,
-        brand: 'Chevrolet',
-        model: 'Corsa Classic',
-        trim: 'LS',
-        price: 'Consultar',
-        year: '2015',
-        km: '162.000KM',
-        fuel: 'Nafta',
-        condition: 'Usados',
-        image: './Autos Pagina/Corsa 2015/Corsa 2.webp',
-        gallery: [
-            './Autos Pagina/Corsa 2015/Corsa 1.webp',
-            './Autos Pagina/Corsa 2015/Corsa 2.webp',
-            './Autos Pagina/Corsa 2015/Corsa 3.webp'
-        ],
-        status: 'Vendido',
-        available: false,
-        description: 'El Chevrolet Corsa Classic LS 2015 es un referente de confiabilidad y economía en el segmento de entrada. Equipado con el motor 1.4L de 90 CV, se destaca por su bajo consumo de combustible y costos de mantenimiento reducidos, ideal para la ciudad.',
-        features: ['Dirección asistida', 'Aire acondicionado', 'Doble airbag frontal', 'Frenos ABS', 'Llantas de acero con tazas']
-    },
+
     {
         id: 3,
         brand: 'Renault',
