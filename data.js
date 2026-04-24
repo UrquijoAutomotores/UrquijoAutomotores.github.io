@@ -211,7 +211,7 @@ const inventoryData = [
         km: '106.000KM',
         fuel: 'Nafta',
         condition: 'Usados',
-        image: './Autos Pagina/Citroen-Piccaso1.webp',
+        image: './Autos Pagina/Citroen-Piccaso/Piccaso1.webp',
         gallery: [
             './Autos Pagina/Citroen-Piccaso/Piccaso2.webp',
             './Autos Pagina/Citroen-Piccaso/Piccaso3.webp',
