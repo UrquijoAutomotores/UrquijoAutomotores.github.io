@@ -201,6 +201,28 @@ const inventoryData = [
         description: 'El Peugeot 308 Allure Nav 1.6 HDI 2013 combina un diseño elegante con la eficiencia de su motor diésel. Con 115 CV y un excelente rendimiento de combustible, es ideal para quienes buscan confort y economía en sus viajes.',
         features: ['Motor 1.6L HDI de 115 CV', 'Transmisión manual de 5 velocidades', 'Frenos ABS con EBD', 'Doble airbag frontal', 'Aire acondicionado', 'Levantacristales eléctricos', 'Cierre centralizado con comando a distancia', 'Llantas de aleación ligera de 16"', 'Apoyabrazos central delantero', 'Sistema de alarma antirrobo', 'Sensor de estacionamiento trasero', 'Espejos retrovisores eléctricos', 'Levantacristales eléctricos con función "one-touch"']
     },
+    {
+        id: 10,
+        brand: 'Citroen',
+        model: 'Xsara Picasso 1.6 L',
+        trim: 'Exclusive',
+        price: 'Consultar',
+        year: '2008',
+        km: '106.000KM',
+        fuel: 'Nafta',
+        condition: 'Usados',
+        image: './Autos Pagina/Citroen-Piccaso1.webp',
+        gallery: [
+            './Autos Pagina/Citroen-Piccaso/Piccaso2.webp',
+            './Autos Pagina/Citroen-Piccaso/Piccaso3.webp',
+            './Autos Pagina/Citroen-Piccaso/Piccaso4.webp',
+            './Autos Pagina/Citroen-Piccaso/Piccaso-km.webp',
+        ],
+        status: 'Disponible',
+        available: true,
+        description: 'El Ford Fiesta Kinetic S Plus 2014 destaca por su atractivo y moderno diseño global. Equipado con el confiable motor 1.6L Sigma de 120 CV, ofrece un excelente equilibrio entre eficiencia y respuesta urbana, sumado a un completo nivel de equipamiento en confort y seguridad para su segmento.',
+        features: ['Sistema de conectividad SYNC con control por voz', 'Llantas de aleación de 15"', 'Doble airbag frontal y frenos ABS', 'Aire acondicionado', 'Alzacristales y espejos eléctricos']
+    },
 ];
 
 // Función para generar URLs amigables
