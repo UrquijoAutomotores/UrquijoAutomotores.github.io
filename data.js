@@ -22,6 +22,29 @@ const inventoryData = [
     },
 
     {
+        id: 2,
+        brand: 'Fiat',
+        model: 'Palio',
+        trim: 'Adventure',
+        price: 'Consultar',
+        year: '2011',
+        km: '124.000KM',
+        fuel: 'Nafta',
+        condition: 'Usados',
+        image: './Autos Pagina/Fiat-palio/Palio1.webp',
+        gallery: [
+            './Autos Pagina/Renault Kwid 2025 0Km/Palio4.webp',
+            './Autos Pagina/Renault Kwid 2025 0Km/Palio5.webp',
+            './Autos Pagina/Renault Kwid 2025 0Km/Palio3.webp',
+            './Autos Pagina/Renault Kwid 2025 0Km/palio-km.webp',
+        ],
+        status: 'Disponible',
+        available: true,
+        description: 'La Fiat Palio Adventure 2011 fusiona la gran capacidad de un vehículo familiar con la fortaleza de un todoterreno ligero. Impulsada por una mecánica a nafta de probada confiabilidad, destaca por su excelente despeje del suelo y suspensión reforzada, convirtiéndola en la opción ideal para transitar con total seguridad tanto en la ciudad como en caminos de tierra',
+        features: ['Aire acondicionado', 'Dirección asistida', 'Levantacristales eléctricos', 'Cierre centralizado con comando a distancia', 'Llantas de aleación exclusivas Adventure', 'Barras portaequipajes de techo']
+    },
+    
+    {
         id: 3,
         brand: 'Renault',
         model: 'Kwid',
