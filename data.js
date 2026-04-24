@@ -220,8 +220,8 @@ const inventoryData = [
         ],
         status: 'Disponible',
         available: true,
-        description: 'El Ford Fiesta Kinetic S Plus 2014 destaca por su atractivo y moderno diseño global. Equipado con el confiable motor 1.6L Sigma de 120 CV, ofrece un excelente equilibrio entre eficiencia y respuesta urbana, sumado a un completo nivel de equipamiento en confort y seguridad para su segmento.',
-        features: ['Sistema de conectividad SYNC con control por voz', 'Llantas de aleación de 15"', 'Doble airbag frontal y frenos ABS', 'Aire acondicionado', 'Alzacristales y espejos eléctricos']
+        description: 'La Citroën Xsara Picasso 1.6 Exclusive es el monovolumen por excelencia, diseñado para maximizar el confort y el espacio de toda la familia. Equipada con un eficiente motor 1.6L que garantiza un bajo consumo, esta versión tope de gama ofrece una modularidad interior inigualable y un nivel de equipamiento premium, haciendo que cada viaje largo o recorrido urbano sea una experiencia de primera clase',
+        features: ['climatizador automático', 'Frenos ABS', 'Levantacristales eléctricos en las 4 puertas', 'Cierre centralizado con comando', 'Espejos de regulación eléctrica']
     },
 ];
 
