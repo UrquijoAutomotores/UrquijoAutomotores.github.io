@@ -33,9 +33,9 @@ const inventoryData = [
         condition: 'Usados',
         image: './Autos Pagina/Fiat-palio/Palio1.webp',
         gallery: [
-            './Autos Pagina/Renault Kwid 2025 0Km/Palio4.webp',
-            './Autos Pagina/Renault Kwid 2025 0Km/Palio5.webp',
-            './Autos Pagina/Renault Kwid 2025 0Km/Palio3.webp',
+            './Autos Pagina/Renault Kwid 2025 0Km/palio4.webp',
+            './Autos Pagina/Renault Kwid 2025 0Km/palio5.webp',
+            './Autos Pagina/Renault Kwid 2025 0Km/palio3.webp',
             './Autos Pagina/Renault Kwid 2025 0Km/palio-km.webp',
         ],
         status: 'Disponible',
