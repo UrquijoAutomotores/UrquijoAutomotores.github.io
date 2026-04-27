@@ -130,8 +130,8 @@ const inventoryData = [
             './Autos Pagina/Fiat Strada 2013 con Gnc/Strada 4.webp',
             './Autos Pagina/Fiat Strada 2013 con Gnc/Strada 5.webp',
         ],
-        status: 'Disponible',
-        available: true,
+        status: 'Reservado',
+        available: false,
         description: 'La Fiat Strada Adventure 2013 es la pick-up compacta perfecta para el trabajo y el esparcimiento. Con su diseño off-road y motor E-Torq 1.6L de 115 CV, ofrece versatilidad y capacidad de carga sin resignar confort para sus pasajeros.',
         features: ['Sistema Locker de bloqueo de diferencial', 'Llantas de aleación ligera de 15"', 'Faros antiniebla y de profundidad', 'Brújula e inclinómetro integrados', 'Estribos laterales y lona marítima']
     },
@@ -196,8 +196,8 @@ const inventoryData = [
             './Autos Pagina/Peugeot-308/Peugeot-308-3.webp',
             './Autos Pagina/Peugeot-308/Peugeot-308-4.webp'
         ],
-        status: 'Disponible',
-        available: true,
+        status: 'Reservado',
+        available: false,
         description: 'El Peugeot 308 Allure Nav 1.6 HDI 2013 combina un diseño elegante con la eficiencia de su motor diésel. Con 115 CV y un excelente rendimiento de combustible, es ideal para quienes buscan confort y economía en sus viajes.',
         features: ['Motor 1.6L HDI de 115 CV', 'Transmisión manual de 5 velocidades', 'Frenos ABS con EBD', 'Doble airbag frontal', 'Aire acondicionado', 'Levantacristales eléctricos', 'Cierre centralizado con comando a distancia', 'Llantas de aleación ligera de 16"', 'Apoyabrazos central delantero', 'Sistema de alarma antirrobo', 'Sensor de estacionamiento trasero', 'Espejos retrovisores eléctricos', 'Levantacristales eléctricos con función "one-touch"']
     },
