@@ -26,7 +26,7 @@ const inventoryData = [
         model: 'Gol',
         trim: 'Power 1.6',
         price: 'Consultar',
-        year: '201',
+        year: '2010',
         km: '124.000KM',
         fuel: 'Nafta',
         condition: 'Usados',
