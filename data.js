@@ -27,7 +27,7 @@ const inventoryData = [
         trim: 'Power 1.6',
         price: 'Consultar',
         year: '2010',
-        km: '124.000KM',
+        km: '123.000KM',
         fuel: 'Nafta',
         condition: 'Usados',
         image: './Autos Pagina/gol-power/gol1.webp',
