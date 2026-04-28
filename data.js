@@ -40,7 +40,7 @@ const inventoryData = [
         status: 'Disponible',
         available: true,
         description: 'este Gol Power 1.6 de 3 puertas, un verdadero clásico de nuestras calles. Conocido por su mecánica noble y su bajo costo de mantenimiento, es la opción ideal tanto para tu primer auto como para el día a día en la ciudad',
-        features: ['Aire acondicionado', 'Dirección asistida', 'Levantacristales eléctricos', 'Cierre centralizado con comando a distancia', 'Llantas de aleación exclusivas Adventure', 'Barras portaequipajes de techo']
+        features: ['Aire acondicionado', 'Dirección asistida']
     },
     {
         id: 3,
