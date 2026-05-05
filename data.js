@@ -38,7 +38,7 @@ const inventoryData = [
             './Autos Pagina/gol-power/gol5.webp',
         ],
         status: 'Disponible',
-        available: true,
+        available: false,
         description: 'este Gol Power 1.6 de 3 puertas, un verdadero clásico de nuestras calles. Conocido por su mecánica noble y su bajo costo de mantenimiento, es la opción ideal tanto para tu primer auto como para el día a día en la ciudad',
         features: ['Aire acondicionado', 'Dirección asistida']
     },
@@ -129,7 +129,7 @@ const inventoryData = [
             './Autos Pagina/VW Gol Trend 2018/Trend 4.webp'
         ],
         status: 'Disponible',
-        available: true,
+        available: false,
         description: 'El Volkswagen Gol Trend 2018 es un clásico indiscutido del mercado automotor. Su robusto y probado motor 1.6L de 101 CV de 8 válvulas garantiza un desempeño ágil y duradero con uno de los mejores valores de reventa.',
         features: ['Sistema de audio Media Plus', 'Cierre centralizado con comando a distancia', 'Alzacristales eléctricos delanteros', 'Alarma antirrobo volumétrica', 'Doble airbag frontal y frenos ABS']
     },
