@@ -128,7 +128,7 @@ const inventoryData = [
             './Autos Pagina/VW Gol Trend 2018/Trend 3.webp',
             './Autos Pagina/VW Gol Trend 2018/Trend 4.webp'
         ],
-        status: 'Reservadp',
+        status: 'Reservado',
         available: false,
         description: 'El Volkswagen Gol Trend 2018 es un clásico indiscutido del mercado automotor. Su robusto y probado motor 1.6L de 101 CV de 8 válvulas garantiza un desempeño ágil y duradero con uno de los mejores valores de reventa.',
         features: ['Sistema de audio Media Plus', 'Cierre centralizado con comando a distancia', 'Alzacristales eléctricos delanteros', 'Alarma antirrobo volumétrica', 'Doble airbag frontal y frenos ABS']
