@@ -22,25 +22,25 @@ const inventoryData = [
     },
     {
         id: 2,
-        brand: 'Volkswagen',
-        model: 'Gol',
-        trim: 'Power 1.6',
+        brand: 'Chevrolet',
+        model: 'Onix',
+        trim: 'Joy',
         price: 'Consultar',
-        year: '2010',
-        km: '123.000KM',
+        year: '2018',
+        km: 'Consultar',
         fuel: 'Nafta',
         condition: 'Usados',
-        image: './Autos Pagina/gol-power/gol1.webp',
+        image: './Autos Pagina/Onix-Joy/Onix1.webp',
         gallery: [
-            './Autos Pagina/gol-power/gol2.webp',
-            './Autos Pagina/gol-power/gol3.webp',
-            './Autos Pagina/gol-power/gol4.webp',
-            './Autos Pagina/gol-power/gol5.webp',
+            './Autos Pagina/Onix-Joy/Onix2.webp',
+            './Autos Pagina/Onix-Joy/OnixInterior.webp',
+            './Autos Pagina/Onix-Joy/InteriorAtras.webp',
+            './Autos Pagina/Onix-Joy/OnixTacometro.webp'
         ],
-        status: 'Reservado',
-        available: false,
-        description: 'este Gol Power 1.6 de 3 puertas, un verdadero clásico de nuestras calles. Conocido por su mecánica noble y su bajo costo de mantenimiento, es la opción ideal tanto para tu primer auto como para el día a día en la ciudad',
-        features: ['Aire acondicionado', 'Dirección asistida']
+        status: 'Disponible',
+        available: true,
+        description: 'El Chevrolet Onix Joy es un vehículo confiable, ágil y económico, ideal para el uso diario en la ciudad. Ofrece un diseño moderno, bajo costo de mantenimiento y el confort necesario para tus viajes.',
+        features: ['Aire acondicionado', 'Dirección asistida', 'Doble airbag frontal', 'Frenos ABS']
     },
     {
         id: 3,
@@ -62,9 +62,9 @@ const inventoryData = [
         status: 'Disponible',
         available: true,
         description: 'La Fiat Palio Adventure 2011 fusiona la gran capacidad de un vehículo familiar con la fortaleza de un todoterreno ligero. Impulsada por una mecánica a nafta de probada confiabilidad, destaca por su excelente despeje del suelo y suspensión reforzada, convirtiéndola en la opción ideal para transitar con total seguridad tanto en la ciudad como en caminos de tierra',
-        features: ['Aire acondicionado', 'Dirección asistida', 'Llantas	acero con taza', 'Limpia-lava luneta con desempañador trasero' ]
+        features: ['Aire acondicionado', 'Dirección asistida', 'Llantas	acero con taza', 'Limpia-lava luneta con desempañador trasero']
     },
-    
+
     {
         id: 4,
         brand: 'Renault',
@@ -110,51 +110,6 @@ const inventoryData = [
         available: true,
         description: 'El Ford Territory Titanium 2022 es un SUV mediano que combina diseño moderno, tecnología avanzada y confort para toda la familia. Equipado con un motor 1.5L Turbo de 143 CV, ofrece un excelente equilibrio entre rendimiento y eficiencia.',
         features: ['Pantalla táctil de 10.1"', 'Asientos de cuero', 'Cámara 360°', 'Freno de estacionamiento eléctrico', 'Conectividad Apple CarPlay y Android Auto']
-    },
-    {
-        id: 6,
-        brand: 'Volkswagen',
-        model: 'Gol',
-        trim: 'Trend',
-        price: 'Consultar',
-        year: '2018',
-        km: '93.000KM',
-        fuel: 'Nafta',
-        condition: 'Usados',
-        image: './Autos Pagina/VW Gol Trend 2018/Trend 1.webp',
-        gallery: [
-            './Autos Pagina/VW Gol Trend 2018/Trend 1.webp',
-            './Autos Pagina/VW Gol Trend 2018/Trend 2.webp',
-            './Autos Pagina/VW Gol Trend 2018/Trend 3.webp',
-            './Autos Pagina/VW Gol Trend 2018/Trend 4.webp'
-        ],
-        status: 'Reservado',
-        available: false,
-        description: 'El Volkswagen Gol Trend 2018 es un clásico indiscutido del mercado automotor. Su robusto y probado motor 1.6L de 101 CV de 8 válvulas garantiza un desempeño ágil y duradero con uno de los mejores valores de reventa.',
-        features: ['Sistema de audio Media Plus', 'Cierre centralizado con comando a distancia', 'Alzacristales eléctricos delanteros', 'Alarma antirrobo volumétrica', 'Doble airbag frontal y frenos ABS']
-    },
-    {
-        id: 7,
-        brand: 'Fiat',
-        model: 'Strada',
-        trim: 'Adventure',
-        price: 'Consultar',
-        year: '2013',
-        km: '145.000KM',
-        fuel: 'Nafta y GNC',
-        condition: 'Usados',
-        image: './Autos Pagina/Fiat Strada 2013 con Gnc/Strada 1.webp',
-        gallery: [
-            './Autos Pagina/Fiat Strada 2013 con Gnc/Strada 1.webp',
-            './Autos Pagina/Fiat Strada 2013 con Gnc/Strada 2.webp',
-            './Autos Pagina/Fiat Strada 2013 con Gnc/Strada 3.webp',
-            './Autos Pagina/Fiat Strada 2013 con Gnc/Strada 4.webp',
-            './Autos Pagina/Fiat Strada 2013 con Gnc/Strada 5.webp',
-        ],
-        status: 'Reservado',
-        available: false,
-        description: 'La Fiat Strada Adventure 2013 es la pick-up compacta perfecta para el trabajo y el esparcimiento. Con su diseño off-road y motor E-Torq 1.6L de 115 CV, ofrece versatilidad y capacidad de carga sin resignar confort para sus pasajeros.',
-        features: ['Sistema Locker de bloqueo de diferencial', 'Llantas de aleación ligera de 15"', 'Faros antiniebla y de profundidad', 'Brújula e inclinómetro integrados', 'Estribos laterales y lona marítima']
     },
     {
         id: 8,
@@ -243,7 +198,7 @@ const inventoryData = [
         available: true,
         description: 'La Citroën Xsara Picasso 1.6 Exclusive es el monovolumen por excelencia, diseñado para maximizar el confort y el espacio de toda la familia. Equipada con un eficiente motor 1.6L que garantiza un bajo consumo, esta versión tope de gama ofrece una modularidad interior inigualable y un nivel de equipamiento premium, haciendo que cada viaje largo o recorrido urbano sea una experiencia de primera clase',
         features: ['climatizador automático', 'Frenos ABS', 'Levantacristales eléctricos en las 4 puertas', 'Cierre centralizado con comando', 'Espejos de regulación eléctrica']
-    },
+    }
 ];
 
 // Función para generar URLs amigables
