@@ -43,6 +43,28 @@ const inventoryData = [
         features: ['Aire acondicionado', 'Dirección asistida', 'Doble airbag frontal', 'Frenos ABS']
     },
     {
+        id: 12,
+        brand: 'Ford',
+        model: 'Ka',
+        trim: 'Fly',
+        price: 'Consultar',
+        year: '2010',
+        km: '115.000KM',
+        fuel: 'Nafta',
+        condition: 'Usados',
+        image: './Autos Pagina/Ford-ka/FordKaIni.webp',
+        gallery: [
+            './Autos Pagina/Ford-ka/fordka1.webp',
+            './Autos Pagina/Ford-ka/Fordka2.webp',
+            './Autos Pagina/Ford-ka/Fordka3.webp',
+            './Autos Pagina/Ford-ka/Fordka4.webp'
+        ],
+        status: 'Disponible',
+        available: true,
+        description: 'El Ford Ka es un vehículo compacto, ágil y de excelente rendimiento urbano. Destaca por su practicidad y economía de combustible, siendo la opción ideal para moverse por la ciudad.',
+        features: ['Aire acondicionado', 'Dirección asistida']
+    },
+    {
         id: 3,
         brand: 'Fiat',
         model: 'Palio',
