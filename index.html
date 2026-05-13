@@ -17,11 +17,11 @@
     <meta name="robots" content="index, follow">
     <meta name="author" content="Urquijo Automotores">
     <meta name="publisher" content="Urquijo Automotores">
-    
+
     <meta name="description"
         content="Urquijo Automotores, tu concesionaria de confianza. Encontrá el mejor stock de vehículos usados seleccionados y 0KM en General Belgrano y toda la Provincia de Buenos Aires.">
     <meta name="keywords"
-        content="concesionaria, autos usados, venta de autos, 0km, Urquijo Automotores, autos seminuevos, comprar auto, financiar auto, General Belgrano, Buenos Aires">
+        content="concesionaria, autos usados, venta de autos, 0km, Urquijo Automotores, autos seminuevos, comprar auto, financiar auto, General Belgrano, Buenos Aires,Renault,Toyota,Fiat,Peugeot,Chevrolet,Volkswagen,Ford,">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Urquijo Automotores">
     <meta property="og:description"
@@ -134,10 +134,104 @@
         .img-zoom {
             @apply w-full h-full object-cover transition-transform duration-700 hover:scale-110;
         }
+
+        /* Carrusel de Marcas (Marquee) */
+        .marquee-container {
+            display: flex;
+            overflow: hidden;
+            white-space: nowrap;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .marquee-content {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Tarjetas Skeleton de Carga */
+        @keyframes pulse-bg {
+            0%, 100% { background-color: #f1f5f9; }
+            50% { background-color: #e2e8f0; }
+        }
+        .skeleton {
+            animation: pulse-bg 1.5s ease-in-out infinite;
+        }
+
+        /* Etiquetas Promocionales (Ribbon) */
+        .ribbon-wrapper {
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            width: 120px;
+            height: 120px;
+            overflow: hidden;
+            z-index: 15;
+            pointer-events: none;
+        }
+        .ribbon {
+            position: absolute;
+            top: 25px;
+            left: -30px;
+            transform: rotate(-45deg);
+            width: 160px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+            letter-spacing: 1px;
+            padding: 4px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            background: linear-gradient(90deg, #d62828 0%, #e63946 100%);
+        }
+
+        /* Boton Volver Arriba */
+        #back-to-top {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease-out;
+        }
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Animaciones para el Observer */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, visibility;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
     </style>
 </head>
 
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen opacity-0 transition-opacity duration-1000 ease-in-out" id="main-body">
+
+    <script>
+        // Fade in al cargar
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById('main-body').classList.remove('opacity-0');
+            document.getElementById('main-body').classList.add('opacity-100');
+        });
+    </script>
+
+    <script>
+        // Fade in al cargar
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById('main-body').classList.remove('opacity-0');
+            document.getElementById('main-body').classList.add('opacity-100');
+        });
+    </script>
 
     <!-- Navegacion -->
     <nav class="fixed w-full z-50 transition-all duration-300 py-4 glass" id="navbar">
@@ -204,10 +298,10 @@
 
     <!-- Seccion Hero -->
     <header id="inicio" class="relative h-[95vh] flex items-center justify-center overflow-hidden">
-        <!-- Imagen de Fondo -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=60"
-                alt="Mercedes Benz" fetchpriority="high" class="w-full h-full object-cover">
+        <!-- Imagen de Fondo Parallax -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <img id="hero-bg" src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=60"
+                alt="Mercedes Benz" fetchpriority="high" class="w-full h-full object-cover scale-110 origin-center transition-transform duration-75">
             <div class="absolute inset-0 bg-gradient-to-r from-brand-900/90 via-brand-900/60 to-transparent"></div>
         </div>
 
@@ -228,44 +322,84 @@
                 </p>
 
                 <!-- Barra de Busqueda -->
-                <div
-                    class="glass flex flex-col sm:flex-row items-center p-2 rounded-2xl md:rounded-full max-w-4xl gap-2 shadow-2xl">
-                    <div class="w-full relative px-4 py-2 border-b sm:border-b-0 sm:border-r border-gray-200">
-                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Buscar Modelo</label>
-                        <input type="text" id="search-input" placeholder="Ej. Territory"
-                            class="w-full bg-transparent text-brand-900 font-medium outline-none placeholder:font-normal placeholder:text-gray-400">
+                <div class="glass flex flex-col items-stretch p-3 rounded-2xl md:rounded-3xl max-w-5xl gap-3 shadow-2xl">
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <div class="w-full relative px-4 py-2 border-b sm:border-b-0 sm:border-r border-gray-200">
+                            <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Buscar Modelo</label>
+                            <input type="text" id="search-input" placeholder="Ej. Territory"
+                                class="w-full bg-transparent text-brand-900 font-medium outline-none placeholder:font-normal placeholder:text-gray-400">
+                        </div>
+                        <div class="w-full relative px-4 py-2 border-b sm:border-b-0 sm:border-r border-gray-200">
+                            <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Marca</label>
+                            <select id="brand-select"
+                                class="w-full bg-transparent text-brand-900 font-medium outline-none cursor-pointer appearance-none">
+                                <option value="Todas">Todas</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-4 top-1/2 text-xs text-gray-400 pointer-events-none"></i>
+                        </div>
+                        <div class="w-full relative px-4 py-2 border-b sm:border-b-0 sm:border-r border-gray-200">
+                            <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Condición</label>
+                            <select id="condition-select"
+                                class="w-full bg-transparent text-brand-900 font-medium outline-none cursor-pointer appearance-none">
+                                <option value="Todos">Todos</option>
+                                <option value="Nuevos">Nuevos</option>
+                                <option value="Usados">Usados</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-4 top-1/2 text-xs text-gray-400 pointer-events-none"></i>
+                        </div>
                     </div>
-                    <div class="w-full relative px-4 py-2 border-b sm:border-b-0 sm:border-r border-gray-200">
-                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Marca</label>
-                        <select id="brand-select"
-                            class="w-full bg-transparent text-brand-900 font-medium outline-none cursor-pointer appearance-none">
-                            <option value="Todas">Todas</option>
-                        </select>
-                        <i
-                            class="fas fa-chevron-down absolute right-4 top-1/2 text-xs text-gray-400 pointer-events-none"></i>
+                    
+                    <div class="flex flex-col sm:flex-row gap-2 border-t border-gray-200/50 pt-2">
+                        <div class="w-full relative px-4 py-2 border-b sm:border-b-0 sm:border-r border-gray-200">
+                            <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Año Mínimo</label>
+                            <select id="year-select"
+                                class="w-full bg-transparent text-brand-900 font-medium outline-none cursor-pointer appearance-none">
+                                <option value="Cualquiera">Cualquiera</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-4 top-1/2 text-xs text-gray-400 pointer-events-none"></i>
+                        </div>
+                        <div class="w-full relative px-4 py-2 border-b sm:border-b-0 sm:border-r border-gray-200">
+                            <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Kilometraje Máximo</label>
+                            <select id="km-select"
+                                class="w-full bg-transparent text-brand-900 font-medium outline-none cursor-pointer appearance-none">
+                                <option value="Cualquiera">Cualquiera</option>
+                                <option value="0">0 KM (Nuevo)</option>
+                                <option value="30000">Hasta 30.000 KM</option>
+                                <option value="60000">Hasta 60.000 KM</option>
+                                <option value="100000">Hasta 100.000 KM</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-4 top-1/2 text-xs text-gray-400 pointer-events-none"></i>
+                        </div>
+                        <div class="w-full flex items-center px-4 py-2 border-b sm:border-b-0 sm:border-r border-gray-200">
+                            <button id="fav-toggle-btn" class="w-full text-left bg-transparent text-gray-400 hover:text-accent-500 font-bold outline-none flex items-center gap-2 transition-colors">
+                                <i class="far fa-heart text-xl" id="fav-toggle-icon"></i> <span id="fav-toggle-text">Solo Favoritos</span>
+                            </button>
+                        </div>
+                        
+                        <button id="search-btn"
+                            class="w-full sm:w-auto bg-accent-500 text-white rounded-xl px-10 py-3 font-semibold hover:bg-accent-600 transition-colors flex items-center justify-center gap-2">
+                            <i class="fas fa-search text-sm"></i> <span>Buscar</span>
+                        </button>
                     </div>
-                    <div class="w-full relative px-4 py-2">
-                        <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Condición</label>
-                        <select id="condition-select"
-                            class="w-full bg-transparent text-brand-900 font-medium outline-none cursor-pointer appearance-none">
-                            <option value="Todos">Todos</option>
-                            <option value="Nuevos">Nuevos</option>
-                            <option value="Usados">Usados</option>
-                        </select>
-                        <i
-                            class="fas fa-chevron-down absolute right-4 top-1/2 text-xs text-gray-400 pointer-events-none"></i>
-                    </div>
-                    <button id="search-btn"
-                        class="w-full sm:w-auto bg-accent-500 text-white rounded-xl sm:rounded-full px-8 py-4 font-semibold hover:bg-accent-600 transition-colors flex items-center justify-center gap-2">
-                        <i class="fas fa-search text-sm"></i> <span class="sm:hidden">Buscar</span>
-                    </button>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Carrusel de Marcas (Marquee) -->
+    <!-- Puedes editar las marcas añadiendo o quitando etiquetas <span> -->
+    <div class="bg-white border-y border-gray-100 py-6 overflow-hidden">
+        <div class="marquee-container">
+            <div class="marquee-content items-center gap-16 px-8 text-gray-400 font-display font-bold text-2xl uppercase tracking-widest">
+                <!-- Se duplican para el efecto de movimiento infinito suave -->
+                <span>Ford</span><span>Toyota</span><span>Volkswagen</span><span>Peugeot</span><span>Chevrolet</span><span>Fiat</span><span>Renault</span><span>Jeep</span><span>Honda</span><span>Nissan</span>
+                <span>Ford</span><span>Toyota</span><span>Volkswagen</span><span>Peugeot</span><span>Chevrolet</span><span>Fiat</span><span>Renault</span><span>Jeep</span><span>Honda</span><span>Nissan</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Inventario Destacado -->
-    <section id="inventario" class="py-24 relative overflow-hidden bg-brand-900">
+    <section id="inventario" class="py-24 relative overflow-hidden bg-brand-900 fade-in-section">
         <!-- Efectos de Fondo Minimalistas -->
         <div class="absolute inset-0 z-0 opacity-10"
             style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 32px 32px;"></div>
@@ -305,7 +439,7 @@
     </section>
 
     <!-- Servicios / Beneficios -->
-    <section id="servicios" class="py-24 bg-white border-t border-gray-100">
+    <section id="servicios" class="py-24 bg-white border-t border-gray-100 fade-in-section">
         <div class="container mx-auto px-6 max-w-7xl">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="font-display text-4xl md:text-5xl font-bold text-brand-900 mb-6 tracking-tight">Experiencia
@@ -337,8 +471,104 @@
         </div>
     </section>
 
+    <!-- Sobre Nosotros -->
+    <section id="nosotros" class="py-24 bg-brand-50 border-t border-gray-100 fade-in-section">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 relative">
+                    <div class="absolute inset-0 bg-brand-900 rounded-3xl translate-x-4 translate-y-4"></div>
+                    <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Agencia Urquijo Automotores" class="relative z-10 rounded-3xl object-cover w-full h-[400px] shadow-xl">
+                </div>
+                <div class="order-1 lg:order-2">
+                    <span class="text-accent-500 font-bold uppercase tracking-widest text-sm mb-4 block">Sobre Nosotros</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-brand-900 mb-6 tracking-tight">Trayectoria y Confianza desde 1998</h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">Con más de dos décadas de experiencia en General Belgrano, nos enorgullece ser el referente en la venta de vehículos 0KM y usados seleccionados.</p>
+                    <p class="text-gray-500 mb-8 leading-relaxed">Nuestro compromiso es brindarle transparencia, seguridad y el mejor asesoramiento para que su próxima compra sea una experiencia excepcional y sin preocupaciones.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-brand-900 font-medium"><i class="fas fa-check-circle text-accent-500"></i> Vehículos Rigurosamente Inspeccionados</li>
+                        <li class="flex items-center gap-3 text-brand-900 font-medium"><i class="fas fa-check-circle text-accent-500"></i> Atención Personalizada</li>
+                        <li class="flex items-center gap-3 text-brand-900 font-medium"><i class="fas fa-check-circle text-accent-500"></i> Gestoría Propia</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contadores (Stats) -->
+    <section id="stats" class="py-20 bg-brand-900 relative overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 32px 32px;"></div>
+        <div class="container mx-auto px-6 max-w-6xl relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
+                <div class="pt-6 md:pt-0">
+                    <div class="text-5xl md:text-6xl font-display font-black text-white mb-2"><span class="counter" data-target="25">0</span><span class="text-accent-500">+</span></div>
+                    <p class="text-brand-300 font-medium uppercase tracking-widest text-sm">Años de Experiencia</p>
+                </div>
+                <div class="pt-6 md:pt-0">
+                    <div class="text-5xl md:text-6xl font-display font-black text-white mb-2"><span class="counter" data-target="1500">0</span><span class="text-accent-500">+</span></div>
+                    <p class="text-brand-300 font-medium uppercase tracking-widest text-sm">Vehículos Entregados</p>
+                </div>
+                <div class="pt-6 md:pt-0">
+                    <div class="text-5xl md:text-6xl font-display font-black text-white mb-2"><span class="counter" data-target="100">0</span><span class="text-accent-500">%</span></div>
+                    <p class="text-brand-300 font-medium uppercase tracking-widest text-sm">Transparencia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section id="testimonios" class="py-24 bg-white fade-in-section">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-accent-500 font-bold uppercase tracking-widest text-sm mb-4 block">Testimonios</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-brand-900 mb-6 tracking-tight">Lo que dicen nuestros clientes</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-brand-50 p-8 rounded-3xl relative transition-transform hover:-translate-y-2">
+                    <div class="text-accent-500 flex gap-1 mb-6 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Entregué mi usado y me llevé el Onix en el día. La gestoría fue rapidísima y me resolvieron todo sin vueltas. Altamente recomendados."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center font-bold text-gray-500">MP</div>
+                        <div>
+                            <h4 class="font-bold text-brand-900">Martín Pérez</h4>
+                            <span class="text-xs text-gray-500">General Belgrano</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-brand-50 p-8 rounded-3xl relative transition-transform hover:-translate-y-2">
+                    <div class="text-accent-500 flex gap-1 mb-6 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Excelente atención de principio a fin. Fui desde otra ciudad porque vi la publicación y el auto estaba impecable, tal cual las fotos."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center font-bold text-gray-500">LC</div>
+                        <div>
+                            <h4 class="font-bold text-brand-900">Laura Gómez</h4>
+                            <span class="text-xs text-gray-500">La Plata</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-brand-50 p-8 rounded-3xl relative transition-transform hover:-translate-y-2">
+                    <div class="text-accent-500 flex gap-1 mb-6 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Buscaba financiar una parte de la camioneta y me ofrecieron la mejor tasa del mercado. Muy transparentes y honestos."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center font-bold text-gray-500">DR</div>
+                        <div>
+                            <h4 class="font-bold text-brand-900">Daniel Rodríguez</h4>
+                            <span class="text-xs text-gray-500">Chascomús</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
-    <section class="py-20 bg-brand-900 text-white border-b-4 border-accent-500">
+    <section class="py-20 bg-brand-900 text-white border-b-4 border-accent-500 fade-in-section">
         <div class="container mx-auto px-6 max-w-4xl text-center">
             <h2 class="font-display text-3xl md:text-5xl font-bold mb-6">¿Listo para su nuevo vehículo?</h2>
             <p class="text-gray-400 mb-10 max-w-xl mx-auto">Visítenos en nuestra agencia o contactenos via WhatsApp.</p>
@@ -357,7 +587,7 @@
     </section>
 
     <!-- Pie de Página -->
-    <footer id="contacto" class="bg-white pt-20 pb-10 border-t border-gray-100 mt-auto">
+    <footer id="contacto" class="bg-white pt-20 pb-10 border-t border-gray-100 mt-auto fade-in-section">
         <div class="container mx-auto px-6 max-w-7xl">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
                 <!-- Branding -->
@@ -483,6 +713,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- Botón Volver Arriba -->
+    <button id="back-to-top" class="fixed bottom-6 left-6 w-14 h-14 bg-brand-900 text-white rounded-full flex justify-center items-center text-xl shadow-[0_10px_30px_rgba(21,24,40,0.4)] hover:bg-brand-800 hover:-translate-y-1 transition-all z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- WhatsApp Flotante -->
     <a href="https://wa.me/5492241692356" target="_blank"

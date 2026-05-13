@@ -77,13 +77,33 @@
             }
         }
 
+        /* Animaciones para el Observer */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, visibility;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
         body {
             @apply text-brand-900 bg-white antialiased selection:bg-accent-500 selection:text-white;
         }
     </style>
 </head>
 
-<body class="flex flex-col min-h-screen relative bg-brand-50">
+<body class="flex flex-col min-h-screen relative bg-brand-50 opacity-0 transition-opacity duration-1000 ease-in-out" id="main-body">
+
+    <script>
+        // Fade in al cargar
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById('main-body').classList.remove('opacity-0');
+            document.getElementById('main-body').classList.add('opacity-100');
+        });
+    </script>
     <!-- Efectos de Fondo Minimalistas -->
     <div class="fixed inset-0 z-[-1] opacity-5"
         style="background-image: radial-gradient(#000000 1px, transparent 1px); background-size: 32px 32px;"></div>
@@ -291,18 +311,71 @@
             // Setup Wahtsapp message
             const waMessage = encodeURIComponent(`Hola! Quisiera más información sobre el ${car.brand} ${car.model} ${car.trim} (${car.year}) publicado a ${car.price}.`);
 
+            // Related cars (up to 3 matching brand or condition, excluding current)
+            const relatedCars = inventoryData.filter(c => c.id !== car.id && (c.brand === car.brand || c.condition === car.condition)).slice(0, 3);
+            let relatedHTML = '';
+            if(relatedCars.length > 0) {
+                relatedHTML = `
+                <div class="mt-20 animate-fade-in-up container mx-auto px-6 max-w-7xl">
+                    <h3 class="font-display text-2xl font-bold text-brand-900 mb-6 border-b border-gray-100 pb-2">Vehículos Relacionados</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        ${relatedCars.map(c => `
+                            <a href="detalle.html?auto=${getCarSlug(c)}" class="group block bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-all hover:-translate-y-1">
+                                <div class="h-48 overflow-hidden bg-gray-100 relative">
+                                    <img src="${c.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-display font-bold text-brand-900">${c.brand} ${c.model}</h4>
+                                    <div class="flex justify-between items-center mt-2">
+                                        <span class="text-sm text-gray-500">${c.year} | ${c.km}</span>
+                                        <span class="font-bold text-brand-900">${c.price}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>`;
+            }
+
+            // Favoritos check
+            let favorites = JSON.parse(localStorage.getItem('urquijo_favorites')) || [];
+            const isFav = favorites.includes(car.id);
+            const heartClass = isFav ? 'fas fa-heart text-accent-500 text-2xl' : 'far fa-heart text-gray-400 hover:text-accent-500 text-2xl';
+
+            // Share buttons
+            const shareUrl = window.location.href;
+            const shareWhatsApp = `https://wa.me/?text=${encodeURIComponent('Mira este ' + car.brand + ' ' + car.model + ' en Urquijo Automotores: ' + shareUrl)}`;
+            const shareFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+
             container.innerHTML = `
                 <div class="container mx-auto px-6 max-w-7xl animate-fade-in-up">
-                    <a href="index.html#inventario" class="inline-flex items-center gap-2 text-gray-400 hover:text-accent-500 font-medium mb-4 transition-colors">
-                        <i class="fas fa-arrow-left"></i> Volver al inventario
-                    </a>
+                    <div class="flex justify-between items-center mb-4">
+                        <a href="index.html#inventario" class="inline-flex items-center gap-2 text-gray-400 hover:text-accent-500 font-medium transition-colors">
+                            <i class="fas fa-arrow-left"></i> Volver al inventario
+                        </a>
+                        <div class="flex items-center gap-4 relative z-50">
+                            <button onclick="toggleFavoriteDetail(event, ${car.id})" class="w-12 h-12 rounded-full bg-white border border-gray-300 flex items-center justify-center shadow-md hover:scale-110 transition-all hover:border-accent-500">
+                                <i class="${heartClass}" id="detail-fav-icon"></i>
+                            </button>
+                            <div class="relative group">
+                                <button class="w-12 h-12 rounded-full bg-white border border-gray-300 flex items-center justify-center shadow-md hover:scale-110 transition-all text-gray-500 hover:text-brand-900 hover:border-brand-900">
+                                    <i class="fas fa-share-alt text-2xl"></i>
+                                </button>
+                                <div class="absolute right-0 top-full mt-3 p-3 bg-white rounded-xl shadow-2xl border border-gray-200 flex gap-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                                    <a href="${shareWhatsApp}" target="_blank" class="w-10 h-10 rounded-full bg-green-50 text-green-500 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors"><i class="fab fa-whatsapp text-lg"></i></a>
+                                    <a href="${shareFacebook}" target="_blank" class="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-colors"><i class="fab fa-facebook-f text-lg"></i></a>
+                                    <button onclick="navigator.clipboard.writeText('${shareUrl}'); alert('Enlace copiado al portapapeles!');" class="w-10 h-10 rounded-full bg-gray-50 text-gray-500 flex items-center justify-center hover:bg-gray-500 hover:text-white transition-colors"><i class="fas fa-link text-lg"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <!-- Image Gallery Area -->
                         <div class="space-y-4">
                             <div class="relative h-[350px] md:h-[400px] rounded-3xl overflow-hidden shadow-sm group border border-gray-200 bg-white">
                                 ${car.status ? `<span class="absolute top-4 left-4 z-10 ${car.available ? 'bg-accent-500' : 'bg-brand-900'} text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md">${car.status}</span>` : ''}
-                                <img id="main-image" src="${car.gallery && car.gallery.length > 0 ? car.gallery[0] : car.image}" alt="${car.brand} ${car.model}" fetchpriority="high" class="w-full h-full object-cover transition-all duration-300">
+                                <img id="main-image" onclick="openLightbox()" src="${car.gallery && car.gallery.length > 0 ? car.gallery[0] : car.image}" alt="${car.brand} ${car.model}" fetchpriority="high" class="w-full h-full object-cover transition-all duration-300 cursor-pointer">
                                 
                                 <button onclick="openLightbox()" class="absolute top-4 right-4 z-10 bg-white/90 text-brand-900 w-10 h-10 rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white border border-gray-200"><i class="fas fa-expand-arrows-alt"></i></button>
 
@@ -378,8 +451,26 @@
                             </div>
                         </div>
                     </div>
+                    ${relatedHTML}
                 </div>
             `;
+
+            // Setup custom toggle favorite for detail view
+            window.toggleFavoriteDetail = function(e, carId) {
+                e.preventDefault();
+                e.stopPropagation();
+                let favorites = JSON.parse(localStorage.getItem('urquijo_favorites')) || [];
+                const index = favorites.indexOf(carId);
+                const icon = document.getElementById('detail-fav-icon');
+                if (index === -1) {
+                    favorites.push(carId);
+                    if(icon) icon.className = 'fas fa-heart text-accent-500 text-2xl';
+                } else {
+                    favorites.splice(index, 1);
+                    if(icon) icon.className = 'far fa-heart text-gray-400 hover:text-accent-500 text-2xl';
+                }
+                localStorage.setItem('urquijo_favorites', JSON.stringify(favorites));
+            };
 
             // Configurar lógica del carrusel después de inyectar el HTML
             if (car.gallery && car.gallery.length > 1) {
@@ -421,6 +512,34 @@
                     if (newIndex >= window.currentGallery.length) newIndex = 0;
                     window.changeImage(newIndex);
                 };
+
+                // Swipe & Drag support for main image
+                const mainImgContainer = document.getElementById('main-image').parentElement;
+                let startX = 0;
+                let endX = 0;
+                let isDragging = false;
+                
+                const handleDragStart = (x) => {
+                    startX = x;
+                    isDragging = true;
+                };
+                
+                const handleDragEnd = (x) => {
+                    if (!isDragging) return;
+                    endX = x;
+                    isDragging = false;
+                    if (endX < startX - 50) window.nextImage();
+                    if (endX > startX + 50) window.prevImage();
+                };
+
+                // Touch events
+                mainImgContainer.addEventListener('touchstart', e => handleDragStart(e.changedTouches[0].screenX), {passive: true});
+                mainImgContainer.addEventListener('touchend', e => handleDragEnd(e.changedTouches[0].screenX), {passive: true});
+                
+                // Mouse events
+                mainImgContainer.addEventListener('mousedown', e => { e.preventDefault(); handleDragStart(e.clientX); });
+                mainImgContainer.addEventListener('mouseup', e => handleDragEnd(e.clientX));
+                mainImgContainer.addEventListener('mouseleave', () => { isDragging = false; });
             }
         });
 
@@ -483,6 +602,59 @@
                 document.getElementById('lightbox-img').src = window.currentGallery[window.currentImageIndex];
             }
         }
+
+        // Swipe & Drag support for lightbox
+        document.addEventListener('DOMContentLoaded', () => {
+            const lightboxModal = document.getElementById('lightbox-modal');
+            let lbStartX = 0;
+            let lbEndX = 0;
+            let lbIsDragging = false;
+
+            const handleLbDragStart = (x) => {
+                lbStartX = x;
+                lbIsDragging = true;
+            };
+
+            const handleLbDragEnd = (x) => {
+                if (!lbIsDragging) return;
+                lbEndX = x;
+                lbIsDragging = false;
+                if (lbEndX < lbStartX - 50) nextLightboxImage();
+                if (lbEndX > lbStartX + 50) prevLightboxImage();
+            };
+
+            // Touch events
+            lightboxModal.addEventListener('touchstart', e => handleLbDragStart(e.changedTouches[0].screenX), {passive: true});
+            lightboxModal.addEventListener('touchend', e => handleLbDragEnd(e.changedTouches[0].screenX), {passive: true});
+            
+            // Mouse events
+            lightboxModal.addEventListener('mousedown', e => { e.preventDefault(); handleLbDragStart(e.clientX); });
+            lightboxModal.addEventListener('mouseup', e => handleLbDragEnd(e.clientX));
+            lightboxModal.addEventListener('mouseleave', () => { lbIsDragging = false; });
+
+            // Keyboard support
+            document.addEventListener('keydown', (e) => {
+                if (!window.currentGallery) return;
+                
+                if (e.key === 'ArrowRight') {
+                    const modal = document.getElementById('lightbox-modal');
+                    if (!modal.classList.contains('hidden')) {
+                        nextLightboxImage();
+                    } else {
+                        window.nextImage();
+                    }
+                } else if (e.key === 'ArrowLeft') {
+                    const modal = document.getElementById('lightbox-modal');
+                    if (!modal.classList.contains('hidden')) {
+                        prevLightboxImage();
+                    } else {
+                        window.prevImage();
+                    }
+                } else if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+            });
+        });
     </script>
 </body>
 
