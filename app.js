@@ -152,13 +152,46 @@ function renderInventory(cars) {
             </div>` : '';
 
         // Galería Interactiva
-        let galleryDots = '';
+        let galleryHtml = '';
         if (car.gallery && car.gallery.length > 1) {
-            galleryDots = `
-                <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-20" onclick="event.stopPropagation()">
+            const dotsHtml = `
+                <div class="absolute bottom-2 left-0 right-0 flex justify-center gap-1 z-20" onclick="event.stopPropagation()">
                     ${car.gallery.slice(0, 5).map((img, i) => `
-                        <button onclick="changeCardImage(event, this, '${img}')" class="gallery-dot w-2 h-2 rounded-full transition-all focus:outline-none ${i===0 ? 'bg-white scale-125 shadow-sm' : 'bg-white/50 hover:bg-white'}"></button>
+                        <button onclick="scrollToImage(event, this, ${car.id}, ${i})" class="p-2 focus:outline-none group/dot">
+                            <div class="gallery-dot-${car.id} w-2 h-2 rounded-full transition-all ${i===0 ? 'bg-white scale-125 shadow-sm' : 'bg-white/50 group-hover/dot:bg-white'}"></div>
+                        </button>
                     `).join('')}
+                </div>
+            `;
+            
+            const navArrows = `
+                <button onclick="scrollGallery(event, this, -1)" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-brand-900 flex items-center justify-center shadow-md z-20 opacity-0 group-hover:opacity-100 transition-all hover:scale-110 focus:outline-none hidden md:flex">
+                    <i class="fas fa-chevron-left text-sm -ml-0.5"></i>
+                </button>
+                <button onclick="scrollGallery(event, this, 1)" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-brand-900 flex items-center justify-center shadow-md z-20 opacity-0 group-hover:opacity-100 transition-all hover:scale-110 focus:outline-none hidden md:flex">
+                    <i class="fas fa-chevron-right text-sm -mr-0.5"></i>
+                </button>
+            `;
+            
+            galleryHtml = `
+                <div class="relative h-64 bg-gray-100 overflow-hidden rounded-t-2xl group cursor-pointer" onclick="handleCardClick(event, '${getCarSlug(car)}')">
+                    ${statusBadge}
+                    ${navArrows}
+                    ${dotsHtml}
+                    <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar h-full w-full" onscroll="updateSliderDots(this, ${car.id})">
+                        ${car.gallery.slice(0, 5).map(img => `
+                            <div class="flex-none w-full h-full snap-center relative overflow-hidden">
+                                <img src="${img}" alt="${car.brand} ${car.model}" class="w-full h-full object-cover ${!car.available ? 'grayscale opacity-80' : ''}" loading="lazy">
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        } else {
+            galleryHtml = `
+                <div class="relative h-64 bg-gray-100 overflow-hidden rounded-t-2xl cursor-pointer" onclick="window.location.href='detalle.html?auto=${getCarSlug(car)}'">
+                    ${statusBadge}
+                    <img src="${car.image}" alt="${car.brand} ${car.model}" class="w-full h-full object-cover ${!car.available ? 'grayscale opacity-80' : ''}" loading="lazy">
                 </div>
             `;
         }
@@ -169,11 +202,7 @@ function renderInventory(cars) {
                 <button onclick="toggleFavorite(${car.id}, this.querySelector('i'))" class="absolute top-4 right-4 z-20 bg-white/90 w-10 h-10 rounded-full flex items-center justify-center shadow-sm hover:scale-110 transition-transform">
                     <i class="${isFav ? 'fas fa-heart text-accent-500' : 'far fa-heart text-gray-300'} text-xl transition-colors"></i>
                 </button>
-                <div class="img-zoom-container relative h-64 bg-gray-100 overflow-hidden rounded-t-2xl cursor-pointer" onclick="window.location.href='detalle.html?auto=${getCarSlug(car)}'">
-                    ${statusBadge}
-                    ${galleryDots}
-                    <img src="${car.gallery && car.gallery.length > 0 ? car.gallery[0] : car.image}" alt="${car.brand} ${car.model}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${!car.available ? 'grayscale opacity-80' : ''}" loading="lazy">
-                </div>
+                ${galleryHtml}
                 <div class="p-6 md:p-8 flex flex-col flex-grow">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="font-display text-2xl font-bold ${!car.available ? 'text-gray-400' : 'text-brand-900'} leading-tight">
@@ -423,11 +452,67 @@ counters.forEach(counter => {
     counterObserver.observe(counter);
 });
 
-// Change Image on Main Catalog Card
+// Slider helper functions
+window.updateSliderDots = function(container, carId) {
+    const scrollLeft = container.scrollLeft;
+    const width = container.clientWidth;
+    const index = Math.round(scrollLeft / width);
+    
+    const dots = container.parentElement.querySelectorAll(`.gallery-dot-${carId}`);
+    dots.forEach((dot, i) => {
+        if (i === index) {
+            dot.classList.remove('bg-white/50');
+            dot.classList.add('bg-white', 'scale-125', 'shadow-sm');
+        } else {
+            dot.classList.remove('bg-white', 'scale-125', 'shadow-sm');
+            dot.classList.add('bg-white/50');
+        }
+    });
+};
+
+window.handleCardClick = function(event, slug) {
+    window.location.href = `detalle.html?auto=${slug}`;
+};
+
+window.scrollToImage = function(event, btn, carId, index) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    // Buscar el contenedor con scroll
+    const container = btn.closest('.relative').querySelector('.snap-x');
+    if (container) {
+        const width = container.clientWidth;
+        container.scrollTo({
+            left: width * index,
+            behavior: 'smooth'
+        });
+    }
+};
+
+window.scrollGallery = function(event, btn, direction) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const container = btn.closest('.relative').querySelector('.snap-x');
+    if (container) {
+        const width = container.clientWidth;
+        const currentScroll = container.scrollLeft;
+        let index = Math.round(currentScroll / width);
+        index += direction;
+        
+        container.scrollTo({
+            left: width * index,
+            behavior: 'smooth'
+        });
+    }
+};
+
+// Change Image on Main Catalog Card (kept for legacy if needed)
 window.changeCardImage = function(e, btn, imgSrc) {
     e.preventDefault();
     e.stopPropagation();
     const container = btn.closest('.img-zoom-container');
+    if (!container) return;
     const img = container.querySelector('img');
     img.src = imgSrc;
     const dots = container.querySelectorAll('.gallery-dot');

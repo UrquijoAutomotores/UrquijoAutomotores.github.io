@@ -123,6 +123,14 @@
             background: #94a3b8;
         }
 
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+
         /* Micro-animaciones */
         .hover-lift {
             @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl shadow-brand-900/10;
