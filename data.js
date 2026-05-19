@@ -21,27 +21,6 @@ const inventoryData = [
         features: ['Sistema de conectividad SYNC con control por voz', 'Llantas de aleación de 15"', 'Doble airbag frontal y frenos ABS', 'Aire acondicionado', 'Alzacristales y espejos eléctricos']
     },
     {
-        id: 13,
-        brand: 'Ford',
-        model: 'Fiesta Kinetic',
-        trim: 'Titanium AT',
-        price: 'Consultar',
-        year: '2015',
-        km: '111.000KM',
-        fuel: 'Nafta',
-        condition: 'Usados',
-        image: './Autos Pagina/Fiesta/PortadaFiesta.webp',
-        gallery: [
-            './Autos Pagina/Fiesta/Fiesta 2.webp',
-            './Autos Pagina/Fiesta/Fiesta 3.webp',
-            './Autos Pagina/Fiesta/Fiesta 4.webp'
-        ],
-        status: 'Disponible',
-        available: true,
-        description: 'El Ford Fiesta Kinetic S Plus 2014 destaca por su atractivo y moderno diseño global. Equipado con el confiable motor 1.6L Sigma de 120 CV, ofrece un excelente equilibrio entre eficiencia y respuesta urbana, sumado a un completo nivel de equipamiento en confort y seguridad para su segmento.',
-        features: ['Sistema de conectividad SYNC con control por voz', 'Llantas de aleación de 15"', 'Doble airbag frontal y frenos ABS', 'Aire acondicionado', 'Alzacristales y espejos eléctricos']
-    },
-    {
         id: 2,
         brand: 'Chevrolet',
         model: 'Onix',
@@ -62,6 +41,30 @@ const inventoryData = [
         available: true,
         description: 'El Chevrolet Onix Joy es un vehículo confiable, ágil y económico, ideal para el uso diario en la ciudad. Ofrece un diseño moderno, bajo costo de mantenimiento y el confort necesario para tus viajes.',
         features: ['Aire acondicionado', 'Dirección asistida', 'Doble airbag frontal', 'Frenos ABS']
+    },
+    {
+        id: 13,
+        brand: 'Ford',
+        model: 'Fiesta Kinetic',
+        trim: 'Titanium AT',
+        price: 'Consultar',
+        year: '2015',
+        km: '110.544KM',
+        fuel: 'Nafta',
+        condition: 'Usados',
+        image: './Autos Pagina/Fiesta-Kinetic-Titanium/PortadaFiesta.webp',
+        gallery: [
+            './Autos Pagina/Fiesta-Kinetic-Titanium/PortadaFiesta.webp',
+            './Autos Pagina/Fiesta-Kinetic-Titanium/Fiesta2.webp',
+            './Autos Pagina/Fiesta-Kinetic-Titanium/Fiesta3.webp',
+            './Autos Pagina/Fiesta-Kinetic-Titanium/Fiesta4.webp',
+            './Autos Pagina/Fiesta-Kinetic-Titanium/FiestaInterior.webp',
+            './Autos Pagina/Fiesta-Kinetic-Titanium/FiestaKM.webp'
+        ],
+        status: 'Disponible',
+        available: true,
+        description: 'El Ford Fiesta Kinetic Titanium es la versión tope de gama. Destaca por su atractivo diseño, comodidad de la caja automática, excelente nivel de seguridad con 7 airbags, techo solar eléctrico y tecnología de conectividad avanzada.',
+        features: ['Caja Automática', 'Techo solar eléctrico', 'Climatizador automático', '7 Airbags', 'Control de velocidad crucero']
     },
     {
         id: 12,
