@@ -27,7 +27,7 @@ const inventoryData = [
         trim: 'Titanium AT',
         price: 'Consultar',
         year: '2015',
-        km: '129.000KM',
+        km: '111.000KM',
         fuel: 'Nafta',
         condition: 'Usados',
         image: './Autos Pagina/Fiesta/PortadaFiesta.webp',
