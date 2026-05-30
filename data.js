@@ -89,6 +89,28 @@ const inventoryData = [
         features: ['Aire acondicionado', 'Dirección asistida']
     },
     {
+        id: 14,
+        brand: 'Chevrolet',
+        model: 'Astra',
+        trim: 'GL',
+        price: 'Consultar',
+        year: '2008',
+        km: '126.000KM',
+        fuel: 'Nafta',
+        condition: 'Usados',
+        image: './Autos Pagina/Astra-Gl-2008/astra-costadoderecho',
+        gallery: [
+            './Autos Pagina/Astra-Gl-2008/astra-costado',
+            './Autos Pagina/Astra-Gl-2008/astra-costadoderecho',
+            './Autos Pagina/Astra-Gl-2008/ParteTrasera-astra',
+            './Autos Pagina/Astra-Gl-2008/astra-interior'
+        ],
+        status: 'Disponible',
+        available: true,
+        description: 'El Chevrolet Onix Joy es un vehículo confiable, ágil y económico, ideal para el uso diario en la ciudad. Ofrece un diseño moderno, bajo costo de mantenimiento y el confort necesario para tus viajes.',
+        features: ['Aire acondicionado', 'Dirección asistida', 'Doble airbag frontal', 'Frenos ABS']
+    },
+    {
         id: 3,
         brand: 'Fiat',
         model: 'Palio',
