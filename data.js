@@ -100,10 +100,10 @@ const inventoryData = [
         condition: 'Usados',
         image: './Autos Pagina/Astra-Gl-2008/astra-costadoderecho',
         gallery: [
-            './Autos Pagina/Astra-Gl-2008/astra-costado',
-            './Autos Pagina/Astra-Gl-2008/astra-costadoderecho',
-            './Autos Pagina/Astra-Gl-2008/ParteTrasera-astra',
-            './Autos Pagina/Astra-Gl-2008/astra-interior'
+            './Autos Pagina/Astra-Gl-2008/astra-costado.webp',
+            './Autos Pagina/Astra-Gl-2008/astra-costadoderecho.webp',
+            './Autos Pagina/Astra-Gl-2008/ParteTrasera-astra.webp',
+            './Autos Pagina/Astra-Gl-2008/astra-interior.webp'
         ],
         status: 'Disponible',
         available: true,
