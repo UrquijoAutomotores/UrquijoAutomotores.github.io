@@ -224,28 +224,6 @@ const inventoryData = [
         features: ['Motor 1.0L de 75 CV', 'Transmisión manual de 5 velocidades', 'Dirección asistida eléctrica', 'Frenos ABS con EBD', 'Doble airbag frontal', 'Aire acondicionado', 'Levantacristales eléctricos delanteros', 'Cierre centralizado con comando a distancia', 'Llantas de acero con tazas de 14"', 'Sistema de audio con CD/MP3, USB y Bluetooth', 'Anclajes ISOFIX en plazas traseras', 'Asiento conductor regulable en altura', 'Computadora de a bordo', 'Indicador de cambio de marcha', 'Asiento trasero abatible 60/40', 'Volante regulable en altura', 'Tercera luz de freno', 'Inmovilizador electrónico', 'Sistema de alarma antirrobo', 'Cinturones de seguridad con pretensores', 'Apoyacabezas delanteros y traseros', 'Asiento trasero con ISOFIX', 'Sistema de frenado de emergencia (AFU)', 'Distribución electrónica de frenado (REF)', 'Control de estabilidad (ESP)', 'Control de tracción (ASR)', 'Asistente de arranque en pendiente (HSA)', 'Sensor de estacionamiento trasero', 'Espejos retrovisores eléctricos', 'Levantacristales eléctricos con función "one-touch"']
     },
     {
-        id: 10,
-        brand: 'Peugeot',
-        model: '308 1.6 HDI',
-        trim: 'Allure Nav',
-        price: 'Consultar',
-        year: '2013',
-        km: '117.000KM',
-        fuel: 'Diesel',
-        condition: 'Usados',
-        image: './Autos Pagina/Peugeot-308/Peugeot-308.webp',
-        gallery: [
-            './Autos Pagina/Peugeot-308/Peugeot-308.webp',
-            './Autos Pagina/Peugeot-308/Peugeot-308-2.webp',
-            './Autos Pagina/Peugeot-308/Peugeot-308-3.webp',
-            './Autos Pagina/Peugeot-308/Peugeot-308-4.webp'
-        ],
-        status: 'Reservado',
-        available: false,
-        description: 'El Peugeot 308 Allure Nav 1.6 HDI 2013 combina un diseño elegante con la eficiencia de su motor diésel. Con 115 CV y un excelente rendimiento de combustible, es ideal para quienes buscan confort y economía en sus viajes.',
-        features: ['Motor 1.6L HDI de 115 CV', 'Transmisión manual de 5 velocidades', 'Frenos ABS con EBD', 'Doble airbag frontal', 'Aire acondicionado', 'Levantacristales eléctricos', 'Cierre centralizado con comando a distancia', 'Llantas de aleación ligera de 16"', 'Apoyabrazos central delantero', 'Sistema de alarma antirrobo', 'Sensor de estacionamiento trasero', 'Espejos retrovisores eléctricos', 'Levantacristales eléctricos con función "one-touch"']
-    },
-    {
         id: 11,
         brand: 'Citroen',
         model: 'Xsara Picasso 1.6 L',
