@@ -83,8 +83,8 @@ const inventoryData = [
             './Autos Pagina/Ford-ka/Fordka3.webp',
             './Autos Pagina/Ford-ka/Fordka4.webp'
         ],
-        status: 'Disponible',
-        available: true,
+        status: 'Reservado',
+        available: false,
         description: 'El Ford Ka es un vehículo compacto, ágil y de excelente rendimiento urbano. Destaca por su practicidad y economía de combustible, siendo la opción ideal para moverse por la ciudad.',
         features: ['Aire acondicionado', 'Dirección asistida']
     },
@@ -240,8 +240,8 @@ const inventoryData = [
             './Autos Pagina/Citroen-Piccaso/Piccaso4.webp',
             './Autos Pagina/Citroen-Piccaso/Piccaso-km.webp',
         ],
-        status: 'Disponible',
-        available: true,
+        status: 'Reservado',
+        available: false,
         description: 'La Citroën Xsara Picasso 1.6 Exclusive es el monovolumen por excelencia, diseñado para maximizar el confort y el espacio de toda la familia. Equipada con un eficiente motor 1.6L que garantiza un bajo consumo, esta versión tope de gama ofrece una modularidad interior inigualable y un nivel de equipamiento premium, haciendo que cada viaje largo o recorrido urbano sea una experiencia de primera clase',
         features: ['climatizador automático', 'Frenos ABS', 'Levantacristales eléctricos en las 4 puertas', 'Cierre centralizado con comando', 'Espejos de regulación eléctrica']
     }
