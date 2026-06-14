@@ -67,28 +67,6 @@ const inventoryData = [
         features: ['Caja Automática', 'Techo solar eléctrico', 'Climatizador automático', '7 Airbags', 'Control de velocidad crucero']
     },
     {
-        id: 12,
-        brand: 'Ford',
-        model: 'Ka',
-        trim: 'Fly',
-        price: 'Consultar',
-        year: '2010',
-        km: '115.000KM',
-        fuel: 'Nafta',
-        condition: 'Usados',
-        image: './Autos Pagina/Ford-ka/FordKaIni.webp',
-        gallery: [
-            './Autos Pagina/Ford-ka/fordka1.webp',
-            './Autos Pagina/Ford-ka/Fordka2.webp',
-            './Autos Pagina/Ford-ka/Fordka3.webp',
-            './Autos Pagina/Ford-ka/Fordka4.webp'
-        ],
-        status: 'Reservado',
-        available: false,
-        description: 'El Ford Ka es un vehículo compacto, ágil y de excelente rendimiento urbano. Destaca por su practicidad y economía de combustible, siendo la opción ideal para moverse por la ciudad.',
-        features: ['Aire acondicionado', 'Dirección asistida']
-    },
-    {
         id: 14,
         brand: 'Chevrolet',
         model: 'Astra',
@@ -223,28 +201,7 @@ const inventoryData = [
         description: 'El Volkswagen up! Take 2018 es ideal para moverse en entornos urbanos por sus dimensiones compactas. Con una de las mayores calificaciones de seguridad de su segmento y un modernísimo motor tricilíndrico 1.0L de 75 CV, es la opción inteligente.',
         features: ['Motor 1.0L de 75 CV', 'Transmisión manual de 5 velocidades', 'Dirección asistida eléctrica', 'Frenos ABS con EBD', 'Doble airbag frontal', 'Aire acondicionado', 'Levantacristales eléctricos delanteros', 'Cierre centralizado con comando a distancia', 'Llantas de acero con tazas de 14"', 'Sistema de audio con CD/MP3, USB y Bluetooth', 'Anclajes ISOFIX en plazas traseras', 'Asiento conductor regulable en altura', 'Computadora de a bordo', 'Indicador de cambio de marcha', 'Asiento trasero abatible 60/40', 'Volante regulable en altura', 'Tercera luz de freno', 'Inmovilizador electrónico', 'Sistema de alarma antirrobo', 'Cinturones de seguridad con pretensores', 'Apoyacabezas delanteros y traseros', 'Asiento trasero con ISOFIX', 'Sistema de frenado de emergencia (AFU)', 'Distribución electrónica de frenado (REF)', 'Control de estabilidad (ESP)', 'Control de tracción (ASR)', 'Asistente de arranque en pendiente (HSA)', 'Sensor de estacionamiento trasero', 'Espejos retrovisores eléctricos', 'Levantacristales eléctricos con función "one-touch"']
     },
-    {
-        id: 11,
-        brand: 'Citroen',
-        model: 'Xsara Picasso 1.6 L',
-        trim: 'Exclusive',
-        price: 'Consultar',
-        year: '2008',
-        km: '106.000KM',
-        fuel: 'Nafta',
-        condition: 'Usados',
-        image: './Autos Pagina/Citroen-Piccaso/Piccaso1.webp',
-        gallery: [
-            './Autos Pagina/Citroen-Piccaso/Piccaso2.webp',
-            './Autos Pagina/Citroen-Piccaso/Piccaso3.webp',
-            './Autos Pagina/Citroen-Piccaso/Piccaso4.webp',
-            './Autos Pagina/Citroen-Piccaso/Piccaso-km.webp',
-        ],
-        status: 'Reservado',
-        available: false,
-        description: 'La Citroën Xsara Picasso 1.6 Exclusive es el monovolumen por excelencia, diseñado para maximizar el confort y el espacio de toda la familia. Equipada con un eficiente motor 1.6L que garantiza un bajo consumo, esta versión tope de gama ofrece una modularidad interior inigualable y un nivel de equipamiento premium, haciendo que cada viaje largo o recorrido urbano sea una experiencia de primera clase',
-        features: ['climatizador automático', 'Frenos ABS', 'Levantacristales eléctricos en las 4 puertas', 'Cierre centralizado con comando', 'Espejos de regulación eléctrica']
-    }
+    
 ];
 
 // Función para generar URLs amigables
