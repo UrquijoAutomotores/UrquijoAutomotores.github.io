@@ -15,8 +15,8 @@ const inventoryData = [
             './Autos Pagina/Fiesta/Fiesta 3.webp',
             './Autos Pagina/Fiesta/Fiesta 4.webp'
         ],
-        status: 'Disponible',
-        available: true,
+        status: 'Reservado',
+        available: false,
         description: 'El Ford Fiesta Kinetic S Plus 2014 destaca por su atractivo y moderno diseño global. Equipado con el confiable motor 1.6L Sigma de 120 CV, ofrece un excelente equilibrio entre eficiencia y respuesta urbana, sumado a un completo nivel de equipamiento en confort y seguridad para su segmento.',
         features: ['Sistema de conectividad SYNC con control por voz', 'Llantas de aleación de 15"', 'Doble airbag frontal y frenos ABS', 'Aire acondicionado', 'Alzacristales y espejos eléctricos']
     },
