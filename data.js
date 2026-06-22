@@ -196,8 +196,8 @@ const inventoryData = [
             './Autos Pagina/VW UP 2018/Up 3.webp',
             './Autos Pagina/VW UP 2018/Up 4.webp',
         ],
-        status: 'Disponible',
-        available: true,
+        status: 'Reservado',
+        available: false,
         description: 'El Volkswagen up! Take 2018 es ideal para moverse en entornos urbanos por sus dimensiones compactas. Con una de las mayores calificaciones de seguridad de su segmento y un modernísimo motor tricilíndrico 1.0L de 75 CV, es la opción inteligente.',
         features: ['Motor 1.0L de 75 CV', 'Transmisión manual de 5 velocidades', 'Dirección asistida eléctrica', 'Frenos ABS con EBD', 'Doble airbag frontal', 'Aire acondicionado', 'Levantacristales eléctricos delanteros', 'Cierre centralizado con comando a distancia', 'Llantas de acero con tazas de 14"', 'Sistema de audio con CD/MP3, USB y Bluetooth', 'Anclajes ISOFIX en plazas traseras', 'Asiento conductor regulable en altura', 'Computadora de a bordo', 'Indicador de cambio de marcha', 'Asiento trasero abatible 60/40', 'Volante regulable en altura', 'Tercera luz de freno', 'Inmovilizador electrónico', 'Sistema de alarma antirrobo', 'Cinturones de seguridad con pretensores', 'Apoyacabezas delanteros y traseros', 'Asiento trasero con ISOFIX', 'Sistema de frenado de emergencia (AFU)', 'Distribución electrónica de frenado (REF)', 'Control de estabilidad (ESP)', 'Control de tracción (ASR)', 'Asistente de arranque en pendiente (HSA)', 'Sensor de estacionamiento trasero', 'Espejos retrovisores eléctricos', 'Levantacristales eléctricos con función "one-touch"']
     },
