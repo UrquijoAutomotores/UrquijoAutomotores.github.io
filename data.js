@@ -1,26 +1,5 @@
 const inventoryData = [
     {
-        id: 1,
-        brand: 'Ford',
-        model: 'Fiesta Kinetic',
-        trim: 'S Plus 1.6',
-        price: 'Consultar',
-        year: '2014',
-        km: '129.000KM',
-        fuel: 'Nafta',
-        condition: 'Usados',
-        image: './Autos Pagina/Fiesta/Fiesta 1.webp',
-        gallery: [
-            './Autos Pagina/Fiesta/Fiesta 2.webp',
-            './Autos Pagina/Fiesta/Fiesta 3.webp',
-            './Autos Pagina/Fiesta/Fiesta 4.webp'
-        ],
-        status: 'Reservado',
-        available: false,
-        description: 'El Ford Fiesta Kinetic S Plus 2014 destaca por su atractivo y moderno diseño global. Equipado con el confiable motor 1.6L Sigma de 120 CV, ofrece un excelente equilibrio entre eficiencia y respuesta urbana, sumado a un completo nivel de equipamiento en confort y seguridad para su segmento.',
-        features: ['Sistema de conectividad SYNC con control por voz', 'Llantas de aleación de 15"', 'Doble airbag frontal y frenos ABS', 'Aire acondicionado', 'Alzacristales y espejos eléctricos']
-    },
-    {
         id: 2,
         brand: 'Chevrolet',
         model: 'Onix',
@@ -178,28 +157,6 @@ const inventoryData = [
         available: true,
         description: 'El Fiat Uno Sporting 2011 destaca por su estética deportiva y exclusiva. Equipado con el confiable motor 1.4L EVO de 85 CV y suspensión rebajada, entrega una experiencia de conducción más dinámica conservando su eficiencia típica.',
         features: ['Detalles exteriores aerodinámicos', 'Ópticas enmascaradas y antiniebla', 'Volante deportivo revestido', 'Salida de escape de doble boca', 'Llantas de aleación exclusivas de 15"']
-    },
-    {
-        id: 9,
-        brand: 'Volkswagen',
-        model: 'UP!',
-        trim: 'High 3 Puertas',
-        price: 'Consultar',
-        year: '2018',
-        km: '72.000KM',
-        fuel: 'Nafta',
-        condition: 'Usados',
-        image: './Autos Pagina/VW UP 2018/Up 1.webp',
-        gallery: [
-            './Autos Pagina/VW UP 2018/Up 1.webp',
-            './Autos Pagina/VW UP 2018/Up 2.webp',
-            './Autos Pagina/VW UP 2018/Up 3.webp',
-            './Autos Pagina/VW UP 2018/Up 4.webp',
-        ],
-        status: 'Reservado',
-        available: false,
-        description: 'El Volkswagen up! Take 2018 es ideal para moverse en entornos urbanos por sus dimensiones compactas. Con una de las mayores calificaciones de seguridad de su segmento y un modernísimo motor tricilíndrico 1.0L de 75 CV, es la opción inteligente.',
-        features: ['Motor 1.0L de 75 CV', 'Transmisión manual de 5 velocidades', 'Dirección asistida eléctrica', 'Frenos ABS con EBD', 'Doble airbag frontal', 'Aire acondicionado', 'Levantacristales eléctricos delanteros', 'Cierre centralizado con comando a distancia', 'Llantas de acero con tazas de 14"', 'Sistema de audio con CD/MP3, USB y Bluetooth', 'Anclajes ISOFIX en plazas traseras', 'Asiento conductor regulable en altura', 'Computadora de a bordo', 'Indicador de cambio de marcha', 'Asiento trasero abatible 60/40', 'Volante regulable en altura', 'Tercera luz de freno', 'Inmovilizador electrónico', 'Sistema de alarma antirrobo', 'Cinturones de seguridad con pretensores', 'Apoyacabezas delanteros y traseros', 'Asiento trasero con ISOFIX', 'Sistema de frenado de emergencia (AFU)', 'Distribución electrónica de frenado (REF)', 'Control de estabilidad (ESP)', 'Control de tracción (ASR)', 'Asistente de arranque en pendiente (HSA)', 'Sensor de estacionamiento trasero', 'Espejos retrovisores eléctricos', 'Levantacristales eléctricos con función "one-touch"']
     },
     
 ];
