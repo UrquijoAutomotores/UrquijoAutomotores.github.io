@@ -1,5 +1,27 @@
 const inventoryData = [
     {
+        id: 1,
+        brand: 'Volkswagen',
+        model: 'Suran',
+        trim: 'Trendline',
+        price: 'Consultar',
+        year: '2009',
+        km: 'Consultar',
+        fuel: 'Nafta',
+        condition: 'Usados',
+        image: './Autos Pagina/Suran-2009/Suran-1.webp',
+        gallery: [
+            './Autos Pagina/Suran-2009/Suran-1.webp',
+            './Autos Pagina/Suran-2009/Suran-2.webp',
+            './Autos Pagina/Suran-2009/Suran-3.webp',
+            './Autos Pagina/Suran-2009/Suran-interior.webp'
+        ],
+        status: 'Disponible',
+        available: true,
+        description: 'La Volkswagen Suran 2009 es un vehículo familiar espacioso y versátil, ideal para viajes y el uso diario. Ofrece un gran espacio interior, un baúl generoso y la confiabilidad clásica de Volkswagen.',
+        features: ['Aire acondicionado', 'Dirección asistida', 'Levantavidrios eléctricos', 'Cierre centralizado']
+    },
+    {
         id: 2,
         brand: 'Chevrolet',
         model: 'Onix',
@@ -158,7 +180,7 @@ const inventoryData = [
         description: 'El Fiat Uno Sporting 2011 destaca por su estética deportiva y exclusiva. Equipado con el confiable motor 1.4L EVO de 85 CV y suspensión rebajada, entrega una experiencia de conducción más dinámica conservando su eficiencia típica.',
         features: ['Detalles exteriores aerodinámicos', 'Ópticas enmascaradas y antiniebla', 'Volante deportivo revestido', 'Salida de escape de doble boca', 'Llantas de aleación exclusivas de 15"']
     },
-    
+
 ];
 
 // Función para generar URLs amigables
