@@ -6,7 +6,7 @@ const inventoryData = [
         trim: 'Trendline',
         price: 'Consultar',
         year: '2009',
-        km: '92.000KM',
+        km: 'Consultar',
         fuel: 'Nafta',
         condition: 'Usados',
         image: './Autos Pagina/Suran-2009/Suran-1.webp',
@@ -180,7 +180,30 @@ const inventoryData = [
         description: 'El Fiat Uno Sporting 2011 destaca por su estética deportiva y exclusiva. Equipado con el confiable motor 1.4L EVO de 85 CV y suspensión rebajada, entrega una experiencia de conducción más dinámica conservando su eficiencia típica.',
         features: ['Detalles exteriores aerodinámicos', 'Ópticas enmascaradas y antiniebla', 'Volante deportivo revestido', 'Salida de escape de doble boca', 'Llantas de aleación exclusivas de 15"']
     },
-
+    {
+        id: 15,
+        brand: 'Fiat',
+        model: 'Uno',
+        trim: 'Attractive',
+        price: 'Consultar',
+        year: '2015',
+        km: '64.000KM',
+        fuel: 'Nafta',
+        condition: 'Usados',
+        image: './Autos Pagina/Fiat Uno 2015/Fiatuno-frentederecha.webp',
+        gallery: [
+            './Autos Pagina/Fiat Uno 2015/Fiatuno-frentederecha.webp',
+            './Autos Pagina/Fiat Uno 2015/Fiatuno-frente.webp',
+            './Autos Pagina/Fiat Uno 2015/Fiatuno-derecha.webp',
+            './Autos Pagina/Fiat Uno 2015/Fiatuno-izquierda.webp',
+            './Autos Pagina/Fiat Uno 2015/Fiatuno-Interior.webp',
+            './Autos Pagina/Fiat Uno 2015/Fiatuno-tacometro.webp'
+        ],
+        status: 'Disponible',
+        available: true,
+        description: 'El Fiat Uno 2015 es un auto compacto, económico e ideal para moverte por la ciudad con total agilidad. Cuenta con un diseño moderno, excelente rendimiento de combustible y el equipamiento necesario para tu comodidad diaria.',
+        features: ['Aire acondicionado', 'Dirección asistida', 'Levantavidrios eléctricos', 'Cierre centralizado']
+    }
 ];
 
 // Función para generar URLs amigables
