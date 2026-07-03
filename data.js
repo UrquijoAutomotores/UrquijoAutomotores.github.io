@@ -6,7 +6,7 @@ const inventoryData = [
         trim: 'Trendline',
         price: 'Consultar',
         year: '2009',
-        km: 'Consultar',
+        km: '92.000KM',
         fuel: 'Nafta',
         condition: 'Usados',
         image: './Autos Pagina/Suran-2009/Suran-1.webp',
