@@ -84,8 +84,8 @@ const inventoryData = [
             './Autos Pagina/Astra-Gl-2008/ParteTrasera-astra.webp',
             './Autos Pagina/Astra-Gl-2008/astra-interior.webp'
         ],
-        status: 'Disponible',
-        available: true,
+        status: 'Reservado',
+        available: false,
         description: 'Chevrolet Astra GL modelo 2008 sigue siendo uno de los referentes más buscados en el mercado de usados, ideal para quienes priorizan el confort de marcha y la confiabilidad a largo plazo. Equipado con el reconocido motor naftero 2.0 de 8 válvulas, ofrece un equilibrio perfecto entre agilidad urbana y un andar sereno en ruta, respaldado por una mecánica noble, repuestos accesibles y un mantenimiento muy sencillo.',
         features: ['Levantavidrios eléctricos delanteros y traseros con sistema "One Touch".', 'Aire acondicionado de gran caudal y dirección asistida', 'Llantas de aleación originales de 15 pulgadas', 'Apertura y cierre de puertas a distancia con comando en llave']
     },
