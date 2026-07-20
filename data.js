@@ -67,6 +67,7 @@ const inventoryData = [
         description: 'El Ford Fiesta Kinetic Titanium es la versión tope de gama. Destaca por su atractivo diseño, comodidad de la caja automática, excelente nivel de seguridad con 7 airbags, techo solar eléctrico y tecnología de conectividad avanzada.',
         features: ['Caja Automática', 'Techo solar eléctrico', 'Climatizador automático', '7 Airbags', 'Control de velocidad crucero']
     },
+    {
         id: 3,
         brand: 'Fiat',
         model: 'Palio',
