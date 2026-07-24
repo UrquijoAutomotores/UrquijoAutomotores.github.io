@@ -16,8 +16,8 @@ const inventoryData = [
             './Autos Pagina/Suran-2009/Suran-3.webp',
             './Autos Pagina/Suran-2009/Suran-interior.webp'
         ],
-        status: 'Disponible',
-        available: true,
+        status: 'Reservado',
+        available: false,
         description: 'La Volkswagen Suran 2009 es un vehículo familiar espacioso y versátil, ideal para viajes y el uso diario. Ofrece un gran espacio interior, un baúl generoso y la confiabilidad clásica de Volkswagen.',
         features: ['Aire acondicionado', 'Dirección asistida', 'Levantavidrios eléctricos', 'Cierre centralizado']
     },
