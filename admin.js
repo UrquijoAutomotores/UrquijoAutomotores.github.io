@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Verificar si ya hay una sesión activa
     async function checkSession() {
-        const { data: { session } } = await window.supabase.auth.getSession();
+        const { data: { session } } = await window.supabaseClient.auth.getSession();
         if (session) {
             loginSection.classList.add('hidden');
             adminSection.classList.remove('hidden');
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cargando...';
         loginBtn.disabled = true;
 
-        const { data, error } = await window.supabase.auth.signInWithPassword({
+        const { data, error } = await window.supabaseClient.auth.signInWithPassword({
             email,
             password
         });
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cerrar Sesión
     logoutBtn.addEventListener('click', async () => {
-        await window.supabase.auth.signOut();
+        await window.supabaseClient.auth.signOut();
         checkSession();
     });
 
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const filePath = `autos/${fileName}`;
 
                 // Subir archivo al bucket 'cars-images'
-                const { error: uploadError } = await window.supabase.storage
+                const { error: uploadError } = await window.supabaseClient.storage
                     .from('cars-images')
                     .upload(filePath, file);
 
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Obtener la URL pública de la imagen
-                const { data: { publicUrl } } = window.supabase.storage
+                const { data: { publicUrl } } = window.supabaseClient.storage
                     .from('cars-images')
                     .getPublicUrl(filePath);
                 
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             // 3. Insertar el auto en la tabla 'cars'
-            const { error: dbError } = await window.supabase
+            const { error: dbError } = await window.supabaseClient
                 .from('cars')
                 .insert([newCar]);
 
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!container) return;
 
         try {
-            const { data: cars, error } = await window.supabase
+            const { data: cars, error } = await window.supabaseClient
                 .from('cars')
                 .select('*')
                 .order('created_at', { ascending: false });
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isAvailable = (newStatus !== 'Vendido' && newStatus !== 'Reservado');
         
         try {
-            const { error } = await window.supabase
+            const { error } = await window.supabaseClient
                 .from('cars')
                 .update({ status: newStatus, available: isAvailable })
                 .eq('id', id);
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const { error } = await window.supabase
+            const { error } = await window.supabaseClient
                 .from('cars')
                 .delete()
                 .eq('id', id);
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Llamamos a loadInventory al iniciar sesión correctamente
     const originalCheckSession = checkSession;
     checkSession = async function() {
-        const { data: { session } } = await window.supabase.auth.getSession();
+        const { data: { session } } = await window.supabaseClient.auth.getSession();
         if (session) {
             loginSection.classList.add('hidden');
             adminSection.classList.remove('hidden');

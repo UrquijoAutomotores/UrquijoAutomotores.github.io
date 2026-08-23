@@ -558,7 +558,7 @@ if (inventoryGrid) {
 
     async function loadCarsFromSupabase() {
         try {
-            const { data, error } = await window.supabase
+            const { data, error } = await window.supabaseClient
                 .from('cars')
                 .select('*')
                 .order('created_at', { ascending: false });

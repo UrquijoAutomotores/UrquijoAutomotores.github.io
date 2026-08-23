@@ -280,7 +280,7 @@
 
             try {
                 // Find the car in Supabase
-                const { data: car, error } = await window.supabase
+                const { data: car, error } = await window.supabaseClient
                     .from('cars')
                     .select('*')
                     .eq('id', carId)
@@ -314,7 +314,7 @@
                 const waMessage = encodeURIComponent(`Hola! Quisiera más información sobre el ${car.brand} ${car.model} ${car.trim || ''} (${car.year}) publicado a ${car.price}.`);
 
                 // Related cars (up to 3 matching brand or condition, excluding current)
-                const { data: relatedCarsData } = await window.supabase
+                const { data: relatedCarsData } = await window.supabaseClient
                     .from('cars')
                     .select('*')
                     .neq('id', carId)
