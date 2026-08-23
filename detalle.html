@@ -288,6 +288,10 @@
 
                 if (error || !car) throw error || new Error('Not found');
 
+                // Incrementar contador de visitas (fire and forget)
+                const newViews = (car.views || 0) + 1;
+                window.supabaseClient.from('cars').update({ views: newViews }).eq('id', car.id).then();
+
                 // Render car details
                 document.title = `${car.brand} ${car.model} | Urquijo Automotores`;
 
@@ -452,17 +456,67 @@
                                 </ul>
                             </div>
 
-                            <!-- CTA -->
-                            <div class="mt-auto">
+                            <div class="mt-auto flex flex-col gap-3">
                                 <a href="https://wa.me/5492241692356?text=${waMessage}" target="_blank" class="w-full bg-accent-500 text-white font-bold py-3.5 px-6 rounded-xl hover:bg-accent-600 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-accent-500/20 hover:-translate-y-1">
                                     <i class="fab fa-whatsapp text-xl"></i> Consultar por WhatsApp
                                 </a>
+                                <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 mt-2">
+                                    <h4 class="font-bold text-brand-900 mb-3 text-sm"><i class="fas fa-phone-alt mr-2 text-accent-500"></i>¿Prefieres que te llamemos?</h4>
+                                    <form id="lead-form" class="space-y-3">
+                                        <input type="text" id="lead-name" placeholder="Tu nombre" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-brand-900 focus:ring-1 focus:ring-brand-900">
+                                        <input type="tel" id="lead-phone" placeholder="Tu teléfono" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-brand-900 focus:ring-1 focus:ring-brand-900">
+                                        <button type="submit" class="w-full bg-brand-900 text-white font-bold py-2 px-4 rounded-lg hover:bg-brand-800 transition-colors text-sm flex justify-center items-center"><i class="fas fa-paper-plane mr-2"></i>Enviar mis datos</button>
+                                        <div id="lead-msg" class="hidden text-xs text-center font-bold mt-2 p-2 rounded"></div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                     ${relatedHTML}
                 </div>
             `;
+
+            // Setup lead form submission
+            setTimeout(() => {
+                const leadForm = document.getElementById('lead-form');
+                if (leadForm) {
+                    leadForm.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        const btn = leadForm.querySelector('button');
+                        const msg = document.getElementById('lead-msg');
+                        const name = document.getElementById('lead-name').value;
+                        const phone = document.getElementById('lead-phone').value;
+                        
+                        btn.disabled = true;
+                        btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Enviando...';
+                        
+                        try {
+                            const { error } = await window.supabaseClient.from('leads').insert([{
+                                car_id: car.id,
+                                name: name,
+                                phone: phone,
+                                message: 'Me interesa este ' + car.brand + ' ' + car.model
+                            }]);
+                            
+                            if (error) throw error;
+                            
+                            leadForm.reset();
+                            msg.className = 'text-xs text-center font-bold mt-2 p-2 rounded bg-green-100 text-green-800';
+                            msg.textContent = '¡Datos enviados! Te contactaremos pronto.';
+                            msg.classList.remove('hidden');
+                        } catch (error) {
+                            console.error(error);
+                            msg.className = 'text-xs text-center font-bold mt-2 p-2 rounded bg-red-100 text-red-800';
+                            msg.textContent = 'Hubo un error al enviar tus datos.';
+                            msg.classList.remove('hidden');
+                        } finally {
+                            btn.disabled = false;
+                            btn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i>Enviar mis datos';
+                            setTimeout(() => msg.classList.add('hidden'), 5000);
+                        }
+                    });
+                }
+            }, 100);
 
             // Setup custom toggle favorite for detail view
             window.toggleFavoriteDetail = function(e, carId) {

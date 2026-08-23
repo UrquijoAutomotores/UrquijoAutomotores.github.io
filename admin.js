@@ -243,8 +243,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 .eq('id', id);
 
             if (error) throw error;
-            // Se actualiza el color dinámicamente si se quiere, o simplemente recargamos
             loadInventory();
+            loadDashboardStats();
         } catch (error) {
             alert('Error al actualizar: ' + error.message);
         }
@@ -271,6 +271,99 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Cargar Estadísticas del Dashboard
+    async function loadDashboardStats() {
+        try {
+            const { data: cars, error: carsErr } = await window.supabaseClient.from('cars').select('status, available');
+            if (!carsErr && cars) {
+                const disponibles = cars.filter(c => c.available).length;
+                const vendidos = cars.filter(c => c.status === 'Vendido').length;
+                document.getElementById('stat-disponibles').innerText = disponibles;
+                document.getElementById('stat-vendidos').innerText = vendidos;
+            }
+
+            const { count: leadsCount, error: leadsErr } = await window.supabaseClient.from('leads').select('*', { count: 'exact', head: true }).eq('status', 'Pendiente');
+            if (!leadsErr) {
+                document.getElementById('stat-leads').innerText = leadsCount || 0;
+            }
+        } catch (e) { console.error('Error loading stats:', e); }
+    }
+
+    // Cargar y mostrar los Leads (Clientes)
+    async function loadLeads() {
+        const container = document.getElementById('leads-table-container');
+        if (!container) return;
+
+        try {
+            const { data: leads, error } = await window.supabaseClient
+                .from('leads')
+                .select('*, cars(brand, model)')
+                .order('created_at', { ascending: false });
+
+            if (error) throw error;
+
+            if (!leads || leads.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center py-8">No hay clientes nuevos por contactar.</p>';
+                return;
+            }
+
+            let tableHTML = `
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 text-gray-700 text-sm">
+                            <th class="p-4 border-b font-bold">Fecha</th>
+                            <th class="p-4 border-b font-bold">Cliente</th>
+                            <th class="p-4 border-b font-bold">Vehículo Interés</th>
+                            <th class="p-4 border-b font-bold">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            leads.forEach(lead => {
+                const date = new Date(lead.created_at).toLocaleDateString('es-AR', {day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'});
+                const carName = lead.cars ? `${lead.cars.brand} ${lead.cars.model}` : 'Vehículo Eliminado';
+                const statusColor = lead.status === 'Pendiente' ? 'bg-red-100 text-red-800 border border-red-200' : 'bg-green-100 text-green-800 border border-green-200';
+                
+                tableHTML += `
+                    <tr class="border-b hover:bg-gray-50 transition-colors">
+                        <td class="p-4 text-sm text-gray-500">${date}</td>
+                        <td class="p-4">
+                            <p class="font-bold text-brand-900">${lead.name}</p>
+                            <a href="https://wa.me/${lead.phone.replace(/[^0-9]/g, '')}?text=Hola ${lead.name}, te contacto de Urquijo Automotores por tu consulta sobre el ${carName}." target="_blank" class="text-accent-500 hover:text-accent-600 font-medium text-sm inline-flex items-center mt-1"><i class="fab fa-whatsapp mr-1"></i>${lead.phone}</a>
+                        </td>
+                        <td class="p-4 font-medium text-gray-700">${carName}</td>
+                        <td class="p-4">
+                            <select onchange="updateLeadStatus(${lead.id}, this.value)" class="p-1.5 rounded-lg text-sm font-bold ${statusColor} outline-none cursor-pointer">
+                                <option value="Pendiente" ${lead.status === 'Pendiente' ? 'selected' : ''}>🔴 Pendiente</option>
+                                <option value="Contactado" ${lead.status === 'Contactado' ? 'selected' : ''}>🟢 Contactado</option>
+                            </select>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `</tbody></table>`;
+            container.innerHTML = tableHTML;
+
+        } catch (error) {
+            console.error('Error loading leads:', error);
+            container.innerHTML = '<p class="text-red-500 text-center py-8">Error al cargar clientes.</p>';
+        }
+    }
+
+    // Actualizar estado del lead
+    window.updateLeadStatus = async function(id, newStatus) {
+        try {
+            const { error } = await window.supabaseClient.from('leads').update({ status: newStatus }).eq('id', id);
+            if (error) throw error;
+            loadLeads();
+            loadDashboardStats();
+        } catch (error) {
+            alert('Error al actualizar cliente: ' + error.message);
+        }
+    };
+
     // Llamamos a loadInventory al iniciar sesión correctamente
     const originalCheckSession = checkSession;
     checkSession = async function() {
@@ -278,7 +371,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (session) {
             loginSection.classList.add('hidden');
             adminSection.classList.remove('hidden');
-            loadInventory(); // <--- Novedad: Cargar tabla al entrar
+            loadInventory();
+            loadDashboardStats();
+            loadLeads();
         } else {
             loginSection.classList.remove('hidden');
             adminSection.classList.add('hidden');

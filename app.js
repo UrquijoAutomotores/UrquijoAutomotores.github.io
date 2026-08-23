@@ -561,6 +561,7 @@ if (inventoryGrid) {
             const { data, error } = await window.supabaseClient
                 .from('cars')
                 .select('*')
+                .order('views', { ascending: false, nullsFirst: false })
                 .order('created_at', { ascending: false });
                 
             if (error) throw error;
