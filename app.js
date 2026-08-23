@@ -1,3 +1,13 @@
+// Función para generar URLs amigables
+window.getCarSlug = (car) => {
+    return `${car.brand}-${car.model}-${car.id}`
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Quitar acentos
+        .replace(/[^a-z0-9-]/g, "-") // Reemplazar caracteres raros por guiones
+        .replace(/-+/g, "-") // Evitar guiones dobles
+        .replace(/^-|-$/g, ""); // Quitar guiones extra al principio o final
+};
+
 // Animaciones al Scroll (Intersection Observer)
 const observerOptions = {
     root: null,
@@ -99,7 +109,7 @@ window.showFavoritesOnly = false;
 
 const initialLimit = 6;
 let currentLimit = initialLimit;
-let currentCars = typeof inventoryData !== 'undefined' ? [...inventoryData] : [];
+let currentCars = [];
 
 function updateLoadMoreButton() {
     if (!loadMoreBtn) return;
@@ -538,9 +548,42 @@ if (backToTopBtn) {
 
 // Inicializar el Home
 if (inventoryGrid) {
-    currentCars = typeof inventoryData !== 'undefined' ? [...inventoryData] : [];
     currentLimit = initialLimit;
-    renderInventory(currentCars);
+    inventoryGrid.innerHTML = `
+        <div class="col-span-full py-12 text-center text-gray-500">
+            <i class="fas fa-spinner fa-spin text-4xl mb-4 text-accent-500"></i>
+            <p class="text-xl font-medium">Cargando inventario...</p>
+        </div>
+    `;
+
+    async function loadCarsFromSupabase() {
+        try {
+            const { data, error } = await window.supabase
+                .from('cars')
+                .select('*')
+                .order('created_at', { ascending: false });
+                
+            if (error) throw error;
+            
+            currentCars = data || [];
+            
+            // Re-populate filters if the functions exist
+            if (typeof populateFilters === 'function') {
+                populateFilters(currentCars);
+            }
+            
+            renderInventory(currentCars);
+        } catch (error) {
+            console.error('Error cargando autos:', error);
+            inventoryGrid.innerHTML = `
+                <div class="col-span-full py-12 text-center text-red-500">
+                    <p class="text-xl font-medium">Error al cargar el inventario.</p>
+                </div>
+            `;
+        }
+    }
+    
+    loadCarsFromSupabase();
 }
 
 // Lógica para Smooth Scrolling y cerrar menú en móvil

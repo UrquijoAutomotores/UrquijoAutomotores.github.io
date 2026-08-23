@@ -246,10 +246,11 @@
     </a>
 
     <!-- Scripts -->
-    <script src="data.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-client.js" defer></script>
     <script src="app.js" defer></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             // Obtener el ID de la URL (nueva lógica con SLUG o fallback a ID viejo)
             const urlParams = new URLSearchParams(window.location.search);
             let autoSlug = urlParams.get('auto');
@@ -270,49 +271,57 @@
             }
 
             const container = document.getElementById('car-detail-container');
+            container.innerHTML = `
+                <div class="col-span-full py-12 text-center text-gray-500">
+                    <i class="fas fa-spinner fa-spin text-4xl mb-4 text-accent-500"></i>
+                    <p class="text-xl font-medium">Cargando vehículo...</p>
+                </div>
+            `;
 
-            // Find the car
-            const car = typeof inventoryData !== 'undefined' ? inventoryData.find(c => c.id === carId) : null;
+            try {
+                // Find the car in Supabase
+                const { data: car, error } = await window.supabase
+                    .from('cars')
+                    .select('*')
+                    .eq('id', carId)
+                    .single();
 
-            if (!car) {
-                container.innerHTML = `
-                    <div class="container mx-auto px-6 max-w-7xl text-center py-24">
-                        <i class="fas fa-exclamation-triangle text-6xl text-brand-700 mb-6"></i>
-                        <h1 class="text-3xl font-bold text-white mb-4">Vehículo no encontrado</h1>
-                        <p class="text-gray-400 mb-8">El vehículo que buscas no existe o ha sido removido del inventario.</p>
-                        <a href="index.html" class="bg-accent-500 text-white px-8 py-4 rounded-xl font-semibold hover:bg-accent-600 transition-colors inline-block">Volver al Inventario</a>
-                    </div>
-                `;
-                return;
-            }
+                if (error || !car) throw error || new Error('Not found');
 
-            // Render car details
-            document.title = `${car.brand} ${car.model} | Urquijo Automotores`;
+                // Render car details
+                document.title = `${car.brand} ${car.model} | Urquijo Automotores`;
 
-            // SEO Dinámico para que Google no lo marque como duplicado
-            const metaDesc = document.querySelector('meta[name="description"]');
-            if(metaDesc) metaDesc.content = `Excelente ${car.brand} ${car.model} ${car.trim} del año ${car.year} con ${car.km} km. Conocé más detalles y precio en Urquijo Automotores.`;
-            
-            const ogTitle = document.querySelector('meta[property="og:title"]');
-            if(ogTitle) ogTitle.content = `${car.brand} ${car.model} | Urquijo Automotores`;
-            
-            const ogDesc = document.querySelector('meta[property="og:description"]');
-            if(ogDesc) ogDesc.content = `Mirá este ${car.brand} ${car.model} modelo ${car.year}. Ideal para vos, vení a verlo a General Belgrano.`;
+                // SEO Dinámico para que Google no lo marque como duplicado
+                const metaDesc = document.querySelector('meta[name="description"]');
+                if(metaDesc) metaDesc.content = `Excelente ${car.brand} ${car.model} ${car.trim || ''} del año ${car.year} con ${car.km} km. Conocé más detalles y precio en Urquijo Automotores.`;
+                
+                const ogTitle = document.querySelector('meta[property="og:title"]');
+                if(ogTitle) ogTitle.content = `${car.brand} ${car.model} | Urquijo Automotores`;
+                
+                const ogDesc = document.querySelector('meta[property="og:description"]');
+                if(ogDesc) ogDesc.content = `Mirá este ${car.brand} ${car.model} modelo ${car.year}. Ideal para vos, vení a verlo a General Belgrano.`;
 
-            // URL Canónica dinámica
-            let canonical = document.querySelector('link[rel="canonical"]');
-            if(!canonical) {
-                canonical = document.createElement('link');
-                canonical.rel = 'canonical';
-                document.head.appendChild(canonical);
-            }
-            canonical.href = `https://urquijoautomotores.github.io/detalle.html?auto=${getCarSlug(car)}`;
+                // URL Canónica dinámica
+                let canonical = document.querySelector('link[rel="canonical"]');
+                if(!canonical) {
+                    canonical = document.createElement('link');
+                    canonical.rel = 'canonical';
+                    document.head.appendChild(canonical);
+                }
+                canonical.href = `https://urquijoautomotores.github.io/detalle.html?auto=${window.getCarSlug(car)}`;
 
-            // Setup Wahtsapp message
-            const waMessage = encodeURIComponent(`Hola! Quisiera más información sobre el ${car.brand} ${car.model} ${car.trim} (${car.year}) publicado a ${car.price}.`);
+                // Setup Wahtsapp message
+                const waMessage = encodeURIComponent(`Hola! Quisiera más información sobre el ${car.brand} ${car.model} ${car.trim || ''} (${car.year}) publicado a ${car.price}.`);
 
-            // Related cars (up to 3 matching brand or condition, excluding current)
-            const relatedCars = inventoryData.filter(c => c.id !== car.id && (c.brand === car.brand || c.condition === car.condition)).slice(0, 3);
+                // Related cars (up to 3 matching brand or condition, excluding current)
+                const { data: relatedCarsData } = await window.supabase
+                    .from('cars')
+                    .select('*')
+                    .neq('id', carId)
+                    .or(`brand.eq.${car.brand},condition.eq.${car.condition}`)
+                    .limit(3);
+                
+                const relatedCars = relatedCarsData || [];
             let relatedHTML = '';
             if(relatedCars.length > 0) {
                 relatedHTML = `
@@ -480,15 +489,18 @@
                 window.changeImage = function (index) {
                     window.currentImageIndex = index;
                     const mainImg = document.getElementById('main-image');
-                    mainImg.style.opacity = '0.4';
+                window.changeImage = function(index) {
+                    const mainImage = document.getElementById('main-image');
+                    const lightboxImage = document.getElementById('lightbox-image');
+                    const imageSrc = car.gallery && car.gallery.length > 0 ? car.gallery[index] : car.image;
+                    
+                    mainImage.src = imageSrc;
+                    lightboxImage.src = imageSrc;
+                    currentImageIndex = index;
 
-                    setTimeout(() => {
-                        mainImg.src = window.currentGallery[index];
-                        mainImg.style.opacity = '1';
-                    }, 150);
-
-                    // Actualizar thumbnails
-                    document.querySelectorAll('.thumbnail-btn').forEach((btn, i) => {
+                    // Update thumbnails
+                    const btns = document.querySelectorAll('.thumbnail-btn');
+                    btns.forEach((btn, i) => {
                         if (i === index) {
                             btn.classList.add('border-accent-500', 'opacity-100');
                             btn.classList.remove('border-transparent', 'opacity-60');
@@ -498,6 +510,16 @@
                         }
                     });
                 };
+            } catch (err) {
+                container.innerHTML = `
+                    <div class="container mx-auto px-6 max-w-7xl text-center py-24">
+                        <i class="fas fa-exclamation-triangle text-6xl text-brand-700 mb-6"></i>
+                        <h1 class="text-3xl font-bold text-white mb-4">Vehículo no encontrado</h1>
+                        <p class="text-gray-400 mb-8">El vehículo que buscas no existe o ha sido removido del inventario.</p>
+                        <a href="index.html" class="bg-accent-500 text-white px-8 py-4 rounded-xl font-semibold hover:bg-accent-600 transition-colors inline-block">Volver al Inventario</a>
+                    </div>
+                `;
+            }
 
                 window.prevImage = function () {
                     if (!window.currentGallery) return;
