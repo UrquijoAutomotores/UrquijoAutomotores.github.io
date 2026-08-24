@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusMsg = document.getElementById('status-msg');
     const submitBtn = document.getElementById('submit-btn');
 
-    // Verificar si ya hay una sesión activa
+    // Verificar si ya hay una sesiÃ³n activa
     async function checkSession() {
         const { data: { session } } = await window.supabaseClient.auth.getSession();
         if (session) {
@@ -20,13 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     checkSession();
 
-    // Iniciar Sesión
+    // Iniciar SesiÃ³n
     loginBtn.addEventListener('click', async () => {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         
         if (!email || !password) {
-            alert('Por favor completa correo y contraseña.');
+            alert('Por favor completa correo y contraseÃ±a.');
             return;
         }
 
@@ -43,19 +43,19 @@ document.addEventListener('DOMContentLoaded', () => {
         loginBtn.disabled = false;
 
         if (error) {
-            alert('Error al iniciar sesión: ' + error.message);
+            alert('Error al iniciar sesiÃ³n: ' + error.message);
         } else {
             checkSession();
         }
     });
 
-    // Cerrar Sesión
+    // Cerrar SesiÃ³n
     logoutBtn.addEventListener('click', async () => {
         await window.supabaseClient.auth.signOut();
         checkSession();
     });
 
-    // Función para mostrar mensajes de estado
+    // FunciÃ³n para mostrar mensajes de estado
     function showMsg(text, type) {
         statusMsg.innerText = text;
         statusMsg.classList.remove('hidden', 'bg-blue-100', 'text-blue-700', 'bg-green-100', 'text-green-700', 'bg-red-100', 'text-red-700');
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(type === 'error') statusMsg.classList.add('bg-red-100', 'text-red-700');
     }
 
-    // Guardar Automóvil
+    // Guardar AutomÃ³vil
     carForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Guardando...';
         submitBtn.disabled = true;
         
-        showMsg('Subiendo imágenes al servidor... (puede tardar unos segundos)', 'info');
+        showMsg('Subiendo imÃ¡genes al servidor... (puede tardar unos segundos)', 'info');
 
         try {
             const editId = document.getElementById('edit-car-id').value;
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 1. Subir cada imagen a Supabase Storage
                 for (let i = 0; i < files.length; i++) {
                     const file = files[i];
-                    // Generar un nombre único para que no se sobreescriban
+                    // Generar un nombre Ãºnico para que no se sobreescriban
                     const fileExt = file.name.split('.').pop();
                     const fileName = `${Date.now()}-${Math.floor(Math.random()*1000)}.${fileExt}`;
                     const filePath = `autos/${fileName}`;
@@ -99,19 +99,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         throw new Error(`Error al subir imagen ${i+1}: ${uploadError.message}`);
                     }
 
-                    // Obtener la URL pública de la imagen
+                    // Obtener la URL pÃºblica de la imagen
                     const { data: { publicUrl } } = window.supabaseClient.storage
                         .from('cars-images')
                         .getPublicUrl(filePath);
                     
                     imageUrls.push(publicUrl);
                 }
-                showMsg('Imágenes subidas. Guardando información del auto...', 'info');
+                showMsg('ImÃ¡genes subidas. Guardando informaciÃ³n del auto...', 'info');
             }
 
-            showMsg('Imágenes subidas. Guardando información del auto...', 'info');
+            showMsg('ImÃ¡genes subidas. Guardando informaciÃ³n del auto...', 'info');
 
-            // 2. Preparar el objeto con toda la información
+            // 2. Preparar el objeto con toda la informaciÃ³n
             const featuresInput = document.getElementById('features').value;
             const featuresArray = featuresInput
                 ? featuresInput.split(',').map(f => f.trim()).filter(f => f.length > 0)
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .eq('id', editId);
 
                 if (dbError) throw dbError;
-                showMsg('¡Automóvil actualizado correctamente!', 'success');
+                showMsg('Â¡AutomÃ³vil actualizado correctamente!', 'success');
             } else {
                 // Insertar nuevo auto
                 if (imageUrls.length === 0) {
@@ -157,15 +157,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     .insert([carData]);
 
                 if (dbError) throw dbError;
-                showMsg('¡Automóvil guardado correctamente en la página!', 'success');
+                showMsg('Â¡AutomÃ³vil guardado correctamente en la pÃ¡gina!', 'success');
             }
 
             carForm.reset();
             document.getElementById('edit-car-id').value = '';
-            document.getElementById('form-title').innerHTML = '<i class="fas fa-plus-circle mr-2 text-accent-500"></i>Cargar Nuevo Vehículo';
-            submitBtn.innerHTML = '<i class="fas fa-save mr-2"></i>Guardar Vehículo';
+            document.getElementById('form-title').innerHTML = '<i class="fas fa-plus-circle mr-2 text-accent-500"></i>Cargar Nuevo VehÃ­culo';
+            submitBtn.innerHTML = '<i class="fas fa-save mr-2"></i>Guardar VehÃ­culo';
             
-            // Ocultar mensaje después de 5 segundos
+            // Ocultar mensaje despuÃ©s de 5 segundos
             setTimeout(() => {
                 statusMsg.classList.add('hidden');
             }, 5000);
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (error) throw error;
 
             if (!cars || cars.length === 0) {
-                container.innerHTML = '<p class="text-gray-500">No hay vehículos cargados aún.</p>';
+                container.innerHTML = '<p class="text-gray-500">No hay vehÃ­culos cargados aÃºn.</p>';
                 return;
             }
 
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-gray-100 text-gray-700">
-                            <th class="p-3 border-b">Vehículo</th>
+                            <th class="p-3 border-b">VehÃ­culo</th>
                             <th class="p-3 border-b">Precio</th>
                             <th class="p-3 border-b">Estado</th>
                             <th class="p-3 border-b">Acciones</th>
@@ -239,10 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             </select>
                         </td>
                         <td class="p-3">
-                            <button onclick="editCar(${car.id})" class="text-blue-500 hover:text-blue-700 font-bold p-2 transition-colors" title="Editar vehículo">
+                            <button onclick="editCar(${car.id})" class="text-blue-500 hover:text-blue-700 font-bold p-2 transition-colors" title="Editar vehÃ­culo">
                                 <i class="fas fa-edit"></i> Editar
                             </button>
-                            <button onclick="deleteCar(${car.id})" class="text-red-500 hover:text-red-700 font-bold p-2 transition-colors" title="Eliminar vehículo">
+                            <button onclick="deleteCar(${car.id})" class="text-red-500 hover:text-red-700 font-bold p-2 transition-colors" title="Eliminar vehÃ­culo">
                                 <i class="fas fa-trash-alt"></i> Borrar
                             </button>
                             <button onclick="copyForSocial(${car.id})" class="text-purple-500 hover:text-purple-700 font-bold p-2 transition-colors block mt-2" title="Copiar para Instagram/Facebook">
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Actualizar estado (Global para que el HTML pueda llamarlo)
     window.updateCarStatus = async function(id, newStatus) {
-        // Dependiendo del estado, también cambiamos el campo "available" (para color/gris)
+        // Dependiendo del estado, tambiÃ©n cambiamos el campo "available" (para color/gris)
         const isAvailable = (newStatus !== 'Vendido' && newStatus !== 'Reservado');
         
         try {
@@ -281,9 +281,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Eliminar vehículo
+    // Eliminar vehÃ­culo
     window.deleteCar = async function(id) {
-        if (!confirm('¿Estás seguro de que quieres eliminar este vehículo? Esta acción no se puede deshacer.')) {
+        if (!confirm('Â¿EstÃ¡s seguro de que quieres eliminar este vehÃ­culo? Esta acciÃ³n no se puede deshacer.')) {
             return;
         }
 
@@ -295,14 +295,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (error) throw error;
             
-            alert('Vehículo eliminado correctamente.');
+            alert('VehÃ­culo eliminado correctamente.');
             loadInventory(); // Recargar tabla
         } catch (error) {
             alert('Error al eliminar: ' + error.message);
         }
     };
 
-    // Cargar Estadísticas del Dashboard
+    // Cargar EstadÃ­sticas del Dashboard
     async function loadDashboardStats() {
         try {
             const { data: cars, error: carsErr } = await window.supabaseClient.from('cars').select('status, available');
@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <tr class="bg-gray-50 text-gray-700 text-sm">
                             <th class="p-4 border-b font-bold">Fecha</th>
                             <th class="p-4 border-b font-bold">Cliente</th>
-                            <th class="p-4 border-b font-bold">Vehículo Interés</th>
+                            <th class="p-4 border-b font-bold">VehÃ­culo InterÃ©s</th>
                             <th class="p-4 border-b font-bold">Estado / Acciones</th>
                         </tr>
                     </thead>
@@ -353,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             leads.forEach(lead => {
                 const date = new Date(lead.created_at).toLocaleDateString('es-AR', {day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'});
-                const carName = lead.cars ? `${lead.cars.brand} ${lead.cars.model}` : 'Vehículo Eliminado';
+                const carName = lead.cars ? `${lead.cars.brand} ${lead.cars.model}` : 'VehÃ­culo Eliminado';
                 const statusColor = lead.status === 'Pendiente' ? 'bg-red-100 text-red-800 border border-red-200' : 'bg-green-100 text-green-800 border border-green-200';
                 
                 tableHTML += `
@@ -366,8 +366,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td class="p-4 font-medium text-gray-700">${carName}</td>
                         <td class="p-4 flex gap-2 items-center">
                             <select onchange="updateLeadStatus(${lead.id}, this.value)" class="p-1.5 rounded-lg text-sm font-bold ${statusColor} outline-none cursor-pointer">
-                                <option value="Pendiente" ${lead.status === 'Pendiente' ? 'selected' : ''}>🔴 Pendiente</option>
-                                <option value="Contactado" ${lead.status === 'Contactado' ? 'selected' : ''}>🟢 Contactado</option>
+                                <option value="Pendiente" ${lead.status === 'Pendiente' ? 'selected' : ''}>ðŸ”´ Pendiente</option>
+                                <option value="Contactado" ${lead.status === 'Contactado' ? 'selected' : ''}>ðŸŸ¢ Contactado</option>
                             </select>
                             <button onclick="deleteLead(${lead.id})" class="text-gray-400 hover:text-red-500 transition-colors p-2" title="Eliminar contacto">
                                 <i class="fas fa-trash-alt text-lg"></i>
@@ -405,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Eliminar lead manualmente
     window.deleteLead = async function(id) {
-        if (!confirm('¿Seguro que quieres eliminar este contacto permanentemente?')) return;
+        if (!confirm('Â¿Seguro que quieres eliminar este contacto permanentemente?')) return;
         try {
             const { error } = await window.supabaseClient.from('leads').delete().eq('id', id);
             if (error) throw error;
@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Llamamos a loadInventory al iniciar sesión correctamente
+    // Llamamos a loadInventory al iniciar sesiÃ³n correctamente
     const originalCheckSession = checkSession;
     checkSession = async function() {
         const { data: { session } } = await window.supabaseClient.auth.getSession();
@@ -434,73 +434,73 @@ document.addEventListener('DOMContentLoaded', () => {
     checkSession();
 });
 
-    // Editar vehículo
-    window.editCar = async function(id) {
-        try {
-            const { data: car, error } = await window.supabaseClient
-                .from('cars')
-                .select('*')
-                .eq('id', id)
-                .single();
+// Editar vehículo
+window.editCar = async function(id) {
+    try {
+        const { data: car, error } = await window.supabaseClient
+            .from('cars')
+            .select('*')
+            .eq('id', id)
+            .single();
 
-            if (error) throw error;
+        if (error) throw error;
 
-            document.getElementById('edit-car-id').value = car.id;
-            document.getElementById('brand').value = car.brand;
-            document.getElementById('model').value = car.model;
-            document.getElementById('trim').value = car.trim || '';
-            document.getElementById('price').value = car.price;
-            document.getElementById('year').value = car.year;
-            document.getElementById('km').value = car.km;
-            document.getElementById('fuel').value = car.fuel;
-            document.getElementById('condition').value = car.condition;
-            document.getElementById('status').value = car.status;
-            document.getElementById('available').checked = car.available;
-            document.getElementById('description').value = car.description || '';
-            document.getElementById('features').value = car.features ? car.features.join(', ') : '';
+        document.getElementById('edit-car-id').value = car.id;
+        document.getElementById('brand').value = car.brand;
+        document.getElementById('model').value = car.model;
+        document.getElementById('trim').value = car.trim || '';
+        document.getElementById('price').value = car.price;
+        document.getElementById('year').value = car.year;
+        document.getElementById('km').value = car.km;
+        document.getElementById('fuel').value = car.fuel;
+        document.getElementById('condition').value = car.condition;
+        document.getElementById('status').value = car.status;
+        document.getElementById('available').checked = car.available;
+        document.getElementById('description').value = car.description || '';
+        document.getElementById('features').value = car.features ? car.features.join(', ') : '';
 
-            document.getElementById('form-title').innerHTML = '<i class="fas fa-edit mr-2 text-blue-500"></i>Editar Vehículo';
-            document.getElementById('submit-btn').innerHTML = '<i class="fas fa-save mr-2"></i>Actualizar Vehículo';
+        document.getElementById('form-title').innerHTML = '<i class="fas fa-edit mr-2 text-blue-500"></i>Editar Vehículo';
+        document.getElementById('submit-btn').innerHTML = '<i class="fas fa-save mr-2"></i>Actualizar Vehículo';
 
-            // Scroll hacia el formulario
-            window.scrollTo({ top: document.getElementById('car-form').offsetTop - 50, behavior: 'smooth' });
-            
-            showMsg('Puedes modificar los datos. Si no seleccionas imágenes nuevas, se mantendrán las actuales.', 'info');
-        } catch (error) {
-            alert('Error al cargar datos para editar: ' + error.message);
-        }
-    };
+        // Scroll hacia el formulario
+        window.scrollTo({ top: document.getElementById('car-form').offsetTop - 50, behavior: 'smooth' });
+        
+        showMsg('Puedes modificar los datos. Si no seleccionas imágenes nuevas, se mantendrán las actuales.', 'info');
+    } catch (error) {
+        alert('Error al cargar datos para editar: ' + error.message);
+    }
+};
 
-    // Copiar para redes sociales
-    window.copyForSocial = async function(id) {
-        try {
-            const { data: car, error } = await window.supabaseClient
-                .from('cars')
-                .select('*')
-                .eq('id', id)
-                .single();
+// Copiar para redes sociales
+window.copyForSocial = async function(id) {
+    try {
+        const { data: car, error } = await window.supabaseClient
+            .from('cars')
+            .select('*')
+            .eq('id', id)
+            .single();
 
-            if (error) throw error;
+        if (error) throw error;
 
-            let text = `🚗 ¡NUEVO INGRESO! 🚗\n\n`;
-            text += `🔥 ${car.brand} ${car.model} ${car.trim || ''}🔥\n`;
-            text += `✅ Año: ${car.year}\n`;
-            text += `✅ Kilómetros: ${car.km}\n`;
-            text += `✅ Motor: ${car.fuel}\n\n`;
-            text += `💰 Precio: ${car.price}\n\n`;
-            text += `👇 ¡Consultanos para más información o permutas!\n`;
-            text += `📱 WhatsApp: [Tu Número]\n`;
-            text += `📍 Urquijo Automotores\n\n`;
-            text += `#${car.brand.replace(/\s+/g, '')} #${car.model.replace(/\s+/g, '')} #AutosUsados #UrquijoAutomotores`;
+        let text = `🚗 ¡NUEVO INGRESO! 🚗\n\n`;
+        text += `🔥 ${car.brand} ${car.model} ${car.trim || ''}🔥\n`;
+        text += `✅ Año: ${car.year}\n`;
+        text += `✅ Kilómetros: ${car.km}\n`;
+        text += `✅ Motor: ${car.fuel}\n\n`;
+        text += `💰 Precio: ${car.price}\n\n`;
+        text += `👇 ¡Consultanos para más información o permutas!\n`;
+        text += `📱 WhatsApp: [Tu Número]\n`;
+        text += `📍 Urquijo Automotores\n\n`;
+        text += `#${car.brand.replace(/\s+/g, '')} #${car.model.replace(/\s+/g, '')} #AutosUsados #UrquijoAutomotores`;
 
-            navigator.clipboard.writeText(text).then(() => {
-                alert('¡Texto copiado al portapapeles! Ya podés pegarlo en Instagram o Facebook.');
-            }).catch(err => {
-                alert('Error al copiar el texto: ' + err);
-            });
+        navigator.clipboard.writeText(text).then(() => {
+            alert('¡Texto copiado al portapapeles! Ya podés pegarlo en Instagram o Facebook.');
+        }).catch(err => {
+            alert('Error al copiar el texto: ' + err);
+        });
 
-        } catch (error) {
-            alert('Error al generar texto: ' + error.message);
-        }
-    };
+    } catch (error) {
+        alert('Error al generar texto: ' + error.message);
+    }
+};
 
