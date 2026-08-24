@@ -434,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkSession();
 });
 
-    // Editar vehículo
+    // Editar vehÃ­culo
     window.editCar = async function(id) {
         try {
             const { data: car, error } = await window.supabaseClient
@@ -459,13 +459,13 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('description').value = car.description || '';
             document.getElementById('features').value = car.features ? car.features.join(', ') : '';
 
-            document.getElementById('form-title').innerHTML = '<i class=\as fa-edit mr-2 text-blue-500\></i>Editar Vehículo';
-            document.getElementById('submit-btn').innerHTML = '<i class=\as fa-save mr-2\></i>Actualizar Vehículo';
+            document.getElementById('form-title').innerHTML = '<i class="fas fa-edit mr-2 text-blue-500"></i>Editar VehÃ­culo';
+            document.getElementById('submit-btn').innerHTML = '<i class="fas fa-save mr-2"></i>Actualizar VehÃ­culo';
 
             // Scroll hacia el formulario
             window.scrollTo({ top: document.getElementById('car-form').offsetTop - 50, behavior: 'smooth' });
             
-            showMsg('Puedes modificar los datos. Si no seleccionas imágenes nuevas, se mantendrán las actuales.', 'info');
+            showMsg('Puedes modificar los datos. Si no seleccionas imÃ¡genes nuevas, se mantendrÃ¡n las actuales.', 'info');
         } catch (error) {
             alert('Error al cargar datos para editar: ' + error.message);
         }
@@ -482,19 +482,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (error) throw error;
 
-            let text = \?? ¡NUEVO INGRESO! ??\n\n\;
-            text += \?? \ \ \??\n\;
-            text += \? Año: \\n\;
-            text += \? Kilómetros: \\n\;
-            text += \? Motor: \\n\n\;
-            text += \?? Precio: \\n\n\;
-            text += \?? ¡Consultanos para más información o permutas!\n\;
-            text += \?? WhatsApp: [Tu Número]\n\;
-            text += \?? Urquijo Automotores\n\n\;
-            text += \#\ #\ #AutosUsados #UrquijoAutomotores\;
+            let text = `ðŸš— Â¡NUEVO INGRESO! ðŸš—\n\n`;
+            text += `ðŸ”¥ ${car.brand} ${car.model} ${car.trim || ''}ðŸ”¥\n`;
+            text += `âœ… AÃ±o: ${car.year}\n`;
+            text += `âœ… KilÃ³metros: ${car.km}\n`;
+            text += `âœ… Motor: ${car.fuel}\n\n`;
+            text += `ðŸ’° Precio: ${car.price}\n\n`;
+            text += `ðŸ‘‡ Â¡Consultanos para mÃ¡s informaciÃ³n o permutas!\n`;
+            text += `ðŸ“± WhatsApp: [Tu NÃºmero]\n`;
+            text += `ðŸ“ Urquijo Automotores\n\n`;
+            text += `#${car.brand.replace(/\s+/g, '')} #${car.model.replace(/\s+/g, '')} #AutosUsados #UrquijoAutomotores`;
 
             navigator.clipboard.writeText(text).then(() => {
-                alert('¡Texto copiado al portapapeles! Ya podés pegarlo en Instagram o Facebook.');
+                alert('Â¡Texto copiado al portapapeles! Ya podÃ©s pegarlo en Instagram o Facebook.');
             }).catch(err => {
                 alert('Error al copiar el texto: ' + err);
             });
