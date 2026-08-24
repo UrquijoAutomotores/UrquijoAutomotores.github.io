@@ -174,9 +174,14 @@
                     <p class="text-sm text-gray-500 mt-1">Selecciona todas las fotos que quieras subir a la vez.</p>
                 </div>
 
-                <button type="submit" id="submit-btn" class="col-span-full bg-brand-900 text-white p-4 rounded-xl font-bold text-lg hover:bg-brand-800 transition-all mt-4 shadow-xl shadow-brand-900/20 flex justify-center items-center">
-                    <i class="fas fa-save mr-2 text-accent-500"></i>Guardar Automóvil
-                </button>
+                <div class="col-span-full flex flex-col md:flex-row gap-4 mt-4">
+                    <button type="submit" id="submit-btn" class="flex-1 bg-brand-900 text-white p-4 rounded-xl font-bold text-lg hover:bg-brand-800 transition-all shadow-xl shadow-brand-900/20 flex justify-center items-center">
+                        <i class="fas fa-save mr-2 text-accent-500"></i>Guardar Automóvil
+                    </button>
+                    <button type="button" id="cancel-edit-btn" onclick="cancelEdit()" class="hidden flex-1 bg-gray-500 text-white p-4 rounded-xl font-bold text-lg hover:bg-gray-600 transition-all shadow-xl flex justify-center items-center">
+                        <i class="fas fa-times mr-2 text-white"></i>Cancelar Edición
+                    </button>
+                </div>
             </form>
             <div id="status-msg" class="mt-6 text-center font-bold text-lg hidden p-4 rounded"></div>
 

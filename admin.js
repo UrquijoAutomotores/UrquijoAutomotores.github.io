@@ -157,15 +157,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     .insert([carData]);
 
                 if (dbError) throw dbError;
-                showMsg('Â¡AutomÃ³vil guardado correctamente en la pÃ¡gina!', 'success');
+                showMsg('¡Automóvil guardado correctamente en la página!', 'success');
             }
 
             carForm.reset();
             document.getElementById('edit-car-id').value = '';
-            document.getElementById('form-title').innerHTML = '<i class="fas fa-plus-circle mr-2 text-accent-500"></i>Cargar Nuevo VehÃ­culo';
-            submitBtn.innerHTML = '<i class="fas fa-save mr-2"></i>Guardar VehÃ­culo';
+            document.getElementById('form-title').innerHTML = '<i class="fas fa-plus-circle mr-2 text-accent-500"></i>Cargar Nuevo Vehículo';
+            document.getElementById('submit-btn').innerHTML = '<i class="fas fa-save mr-2 text-accent-500"></i>Guardar Automóvil';
+            const cancelBtn = document.getElementById('cancel-edit-btn');
+            if(cancelBtn) cancelBtn.classList.add('hidden');
             
-            // Ocultar mensaje despuÃ©s de 5 segundos
+            // Ocultar mensaje después de 5 segundos
             setTimeout(() => {
                 statusMsg.classList.add('hidden');
             }, 5000);
@@ -460,7 +462,10 @@ window.editCar = async function(id) {
         document.getElementById('features').value = car.features ? car.features.join(', ') : '';
 
         document.getElementById('form-title').innerHTML = '<i class="fas fa-edit mr-2 text-blue-500"></i>Editar Vehículo';
-        document.getElementById('submit-btn').innerHTML = '<i class="fas fa-save mr-2"></i>Actualizar Vehículo';
+        document.getElementById('submit-btn').innerHTML = '<i class="fas fa-save mr-2 text-accent-500"></i>Actualizar Vehículo';
+        
+        const cancelBtn = document.getElementById('cancel-edit-btn');
+        if(cancelBtn) cancelBtn.classList.remove('hidden');
 
         // Scroll hacia el formulario
         window.scrollTo({ top: document.getElementById('car-form').offsetTop - 50, behavior: 'smooth' });
@@ -502,5 +507,19 @@ window.copyForSocial = async function(id) {
     } catch (error) {
         alert('Error al generar texto: ' + error.message);
     }
+};
+
+// Cancelar edición
+window.cancelEdit = function() {
+    document.getElementById('car-form').reset();
+    document.getElementById('edit-car-id').value = '';
+    document.getElementById('form-title').innerHTML = '<i class="fas fa-plus-circle mr-2 text-accent-500"></i>Cargar Nuevo Vehículo';
+    document.getElementById('submit-btn').innerHTML = '<i class="fas fa-save mr-2 text-accent-500"></i>Guardar Automóvil';
+    document.getElementById('cancel-edit-btn').classList.add('hidden');
+    
+    // Scroll hacia el formulario
+    window.scrollTo({ top: document.getElementById('car-form').offsetTop - 50, behavior: 'smooth' });
+    
+    if (window.showMsg) window.showMsg('Modo edición cancelado.', 'info');
 };
 
