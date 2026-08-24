@@ -166,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('submit-btn').innerHTML = '<i class="fas fa-save mr-2 text-accent-500"></i>Guardar Automóvil';
             const cancelBtn = document.getElementById('cancel-edit-btn');
             if(cancelBtn) cancelBtn.classList.add('hidden');
+            document.getElementById('images').required = true;
             
             // Ocultar mensaje después de 5 segundos
             setTimeout(() => {
@@ -466,6 +467,8 @@ window.editCar = async function(id) {
         
         const cancelBtn = document.getElementById('cancel-edit-btn');
         if(cancelBtn) cancelBtn.classList.remove('hidden');
+        
+        document.getElementById('images').required = false;
 
         // Scroll hacia el formulario
         window.scrollTo({ top: document.getElementById('car-form').offsetTop - 50, behavior: 'smooth' });
@@ -516,6 +519,7 @@ window.cancelEdit = function() {
     document.getElementById('form-title').innerHTML = '<i class="fas fa-plus-circle mr-2 text-accent-500"></i>Cargar Nuevo Vehículo';
     document.getElementById('submit-btn').innerHTML = '<i class="fas fa-save mr-2 text-accent-500"></i>Guardar Automóvil';
     document.getElementById('cancel-edit-btn').classList.add('hidden');
+    document.getElementById('images').required = true;
     
     // Scroll hacia el formulario
     window.scrollTo({ top: document.getElementById('car-form').offsetTop - 50, behavior: 'smooth' });
