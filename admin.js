@@ -76,32 +76,37 @@ document.addEventListener('DOMContentLoaded', () => {
         showMsg('Subiendo imÃ¡genes al servidor... (puede tardar unos segundos)', 'info');
 
         try {
+            const editId = document.getElementById('edit-car-id').value;
             const files = document.getElementById('images').files;
             let imageUrls = [];
 
-            // 1. Subir cada imagen a Supabase Storage
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                // Generar un nombre Ãºnico para que no se sobreescriban
-                const fileExt = file.name.split('.').pop();
-                const fileName = `${Date.now()}-${Math.floor(Math.random()*1000)}.${fileExt}`;
-                const filePath = `autos/${fileName}`;
+            // If we are editing and no new images are uploaded, skip upload
+            if (files.length > 0) {
+                // 1. Subir cada imagen a Supabase Storage
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    // Generar un nombre Ãºnico para que no se sobreescriban
+                    const fileExt = file.name.split('.').pop();
+                    const fileName = `${Date.now()}-${Math.floor(Math.random()*1000)}.${fileExt}`;
+                    const filePath = `autos/${fileName}`;
 
-                // Subir archivo al bucket 'cars-images'
-                const { error: uploadError } = await window.supabaseClient.storage
-                    .from('cars-images')
-                    .upload(filePath, file);
+                    // Subir archivo al bucket 'cars-images'
+                    const { error: uploadError } = await window.supabaseClient.storage
+                        .from('cars-images')
+                        .upload(filePath, file);
 
-                if (uploadError) {
-                    throw new Error(`Error al subir imagen ${i+1}: ${uploadError.message}`);
+                    if (uploadError) {
+                        throw new Error(`Error al subir imagen ${i+1}: ${uploadError.message}`);
+                    }
+
+                    // Obtener la URL pÃºblica de la imagen
+                    const { data: { publicUrl } } = window.supabaseClient.storage
+                        .from('cars-images')
+                        .getPublicUrl(filePath);
+                    
+                    imageUrls.push(publicUrl);
                 }
-
-                // Obtener la URL pÃºblica de la imagen
-                const { data: { publicUrl } } = window.supabaseClient.storage
-                    .from('cars-images')
-                    .getPublicUrl(filePath);
-                
-                imageUrls.push(publicUrl);
+                showMsg('ImÃ¡genes subidas. Guardando informaciÃ³n del auto...', 'info');
             }
 
             showMsg('ImÃ¡genes subidas. Guardando informaciÃ³n del auto...', 'info');
@@ -112,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ? featuresInput.split(',').map(f => f.trim()).filter(f => f.length > 0)
                 : [];
 
-            const newCar = {
+            const carData = {
                 brand: document.getElementById('brand').value,
                 model: document.getElementById('model').value,
                 trim: document.getElementById('trim').value,
@@ -124,21 +129,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 status: document.getElementById('status').value,
                 available: document.getElementById('available').checked,
                 description: document.getElementById('description').value,
-                features: featuresArray,
-                image: imageUrls.length > 0 ? imageUrls[0] : '', // La primera foto como portada
-                gallery: imageUrls // Todas las fotos
+                features: featuresArray
             };
 
-            // 3. Insertar el auto en la tabla 'cars'
-            const { error: dbError } = await window.supabaseClient
-                .from('cars')
-                .insert([newCar]);
+            // Only update images if new ones were provided
+            if (imageUrls.length > 0) {
+                carData.image = imageUrls[0];
+                carData.gallery = imageUrls;
+            }
 
-            if (dbError) throw dbError;
+            if (editId) {
+                // Actualizar auto existente
+                const { error: dbError } = await window.supabaseClient
+                    .from('cars')
+                    .update(carData)
+                    .eq('id', editId);
 
-            // Ã‰xito
-            showMsg('Â¡AutomÃ³vil guardado correctamente en la pÃ¡gina!', 'success');
+                if (dbError) throw dbError;
+                showMsg('Â¡AutomÃ³vil actualizado correctamente!', 'success');
+            } else {
+                // Insertar nuevo auto
+                if (imageUrls.length === 0) {
+                    throw new Error("Debe subir al menos una imagen para un auto nuevo.");
+                }
+                const { error: dbError } = await window.supabaseClient
+                    .from('cars')
+                    .insert([carData]);
+
+                if (dbError) throw dbError;
+                showMsg('Â¡AutomÃ³vil guardado correctamente en la pÃ¡gina!', 'success');
+            }
+
             carForm.reset();
+            document.getElementById('edit-car-id').value = '';
+            document.getElementById('form-title').innerHTML = '<i class="fas fa-plus-circle mr-2 text-accent-500"></i>Cargar Nuevo VehÃ­culo';
+            submitBtn.innerHTML = '<i class="fas fa-save mr-2"></i>Guardar VehÃ­culo';
             
             // Ocultar mensaje despuÃ©s de 5 segundos
             setTimeout(() => {
@@ -214,8 +239,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             </select>
                         </td>
                         <td class="p-3">
+                            <button onclick="editCar(${car.id})" class="text-blue-500 hover:text-blue-700 font-bold p-2 transition-colors" title="Editar vehÃ­culo">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
                             <button onclick="deleteCar(${car.id})" class="text-red-500 hover:text-red-700 font-bold p-2 transition-colors" title="Eliminar vehÃ­culo">
                                 <i class="fas fa-trash-alt"></i> Borrar
+                            </button>
+                            <button onclick="copyForSocial(${car.id})" class="text-purple-500 hover:text-purple-700 font-bold p-2 transition-colors block mt-2" title="Copiar para Instagram/Facebook">
+                                <i class="fab fa-instagram"></i> / <i class="fab fa-facebook"></i> Copiar Post
                             </button>
                         </td>
                     </tr>
@@ -402,3 +433,74 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     checkSession();
 });
+
+    // Editar vehículo
+    window.editCar = async function(id) {
+        try {
+            const { data: car, error } = await window.supabaseClient
+                .from('cars')
+                .select('*')
+                .eq('id', id)
+                .single();
+
+            if (error) throw error;
+
+            document.getElementById('edit-car-id').value = car.id;
+            document.getElementById('brand').value = car.brand;
+            document.getElementById('model').value = car.model;
+            document.getElementById('trim').value = car.trim || '';
+            document.getElementById('price').value = car.price;
+            document.getElementById('year').value = car.year;
+            document.getElementById('km').value = car.km;
+            document.getElementById('fuel').value = car.fuel;
+            document.getElementById('condition').value = car.condition;
+            document.getElementById('status').value = car.status;
+            document.getElementById('available').checked = car.available;
+            document.getElementById('description').value = car.description || '';
+            document.getElementById('features').value = car.features ? car.features.join(', ') : '';
+
+            document.getElementById('form-title').innerHTML = '<i class=\as fa-edit mr-2 text-blue-500\></i>Editar Vehículo';
+            document.getElementById('submit-btn').innerHTML = '<i class=\as fa-save mr-2\></i>Actualizar Vehículo';
+
+            // Scroll hacia el formulario
+            window.scrollTo({ top: document.getElementById('car-form').offsetTop - 50, behavior: 'smooth' });
+            
+            showMsg('Puedes modificar los datos. Si no seleccionas imágenes nuevas, se mantendrán las actuales.', 'info');
+        } catch (error) {
+            alert('Error al cargar datos para editar: ' + error.message);
+        }
+    };
+
+    // Copiar para redes sociales
+    window.copyForSocial = async function(id) {
+        try {
+            const { data: car, error } = await window.supabaseClient
+                .from('cars')
+                .select('*')
+                .eq('id', id)
+                .single();
+
+            if (error) throw error;
+
+            let text = \?? ¡NUEVO INGRESO! ??\n\n\;
+            text += \?? \ \ \??\n\;
+            text += \? Año: \\n\;
+            text += \? Kilómetros: \\n\;
+            text += \? Motor: \\n\n\;
+            text += \?? Precio: \\n\n\;
+            text += \?? ¡Consultanos para más información o permutas!\n\;
+            text += \?? WhatsApp: [Tu Número]\n\;
+            text += \?? Urquijo Automotores\n\n\;
+            text += \#\ #\ #AutosUsados #UrquijoAutomotores\;
+
+            navigator.clipboard.writeText(text).then(() => {
+                alert('¡Texto copiado al portapapeles! Ya podés pegarlo en Instagram o Facebook.');
+            }).catch(err => {
+                alert('Error al copiar el texto: ' + err);
+            });
+
+        } catch (error) {
+            alert('Error al generar texto: ' + error.message);
+        }
+    };
+
