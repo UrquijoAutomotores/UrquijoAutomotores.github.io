@@ -43,9 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
 });
 
-// Parallax Hero y Navbar Config
+// Navbar Config
 const navbar = document.getElementById('navbar');
-const heroImage = document.querySelector('#inicio img');
 
 window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
@@ -58,11 +57,6 @@ window.addEventListener('scroll', () => {
             navbar.classList.remove('shadow-md', 'py-2');
             navbar.classList.add('py-4');
         }
-    }
-
-    // Parallax
-    if (heroImage && scrollY < window.innerHeight) {
-        heroImage.style.transform = `translateY(${scrollY * 0.4}px)`;
     }
 });
 
@@ -403,7 +397,9 @@ const heroBg = document.getElementById('hero-bg');
 if (heroBg) {
     window.addEventListener('scroll', () => {
         const scrollValue = window.scrollY;
-        heroBg.style.transform = `translateY(${scrollValue * 0.4}px) scale(1.1)`;
+        if (scrollValue <= window.innerHeight) {
+            heroBg.style.transform = `translateY(${scrollValue * 0.4}px) scale(1.1)`;
+        }
     });
 }
 

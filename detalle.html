@@ -465,6 +465,11 @@
                                     <form id="lead-form" class="space-y-3">
                                         <input type="text" id="lead-name" placeholder="Tu nombre" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-brand-900 focus:ring-1 focus:ring-brand-900">
                                         <input type="tel" id="lead-phone" placeholder="Tu teléfono" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-brand-900 focus:ring-1 focus:ring-brand-900">
+                                        <select id="lead-schedule" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-brand-900 focus:ring-1 focus:ring-brand-900 bg-white text-gray-700">
+                                            <option value="" disabled selected>¿En qué horario te llamamos?</option>
+                                            <option value="Mañana (9:00 a 12:30)">Mañana (9:00 a 12:30)</option>
+                                            <option value="Tarde (16:00 a 20:00)">Tarde (16:00 a 20:00)</option>
+                                        </select>
                                         <button type="submit" class="w-full bg-brand-900 text-white font-bold py-2 px-4 rounded-lg hover:bg-brand-800 transition-colors text-sm flex justify-center items-center"><i class="fas fa-paper-plane mr-2"></i>Enviar mis datos</button>
                                         <div id="lead-msg" class="hidden text-xs text-center font-bold mt-2 p-2 rounded"></div>
                                     </form>
@@ -486,19 +491,28 @@
                         const msg = document.getElementById('lead-msg');
                         const name = document.getElementById('lead-name').value;
                         const phone = document.getElementById('lead-phone').value;
+                        const schedule = document.getElementById('lead-schedule').value;
                         
                         btn.disabled = true;
                         btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Enviando...';
                         
                         try {
-                            const { error } = await window.supabaseClient.from('leads').insert([{
-                                car_id: car.id,
-                                name: name,
-                                phone: phone,
-                                message: 'Me interesa este ' + car.brand + ' ' + car.model
-                            }]);
+                            const response = await fetch("https://formsubmit.co/ajax/urquijoautomotores@gmail.com", {
+                                method: "POST",
+                                headers: { 
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    "Vehículo de interés": `${car.brand} ${car.model} ${car.trim || ''} (${car.year})`,
+                                    "Nombre": name,
+                                    "Teléfono": phone,
+                                    "Horario preferido": schedule,
+                                    "_subject": `Nuevo contacto por ${car.brand} ${car.model}`
+                                })
+                            });
                             
-                            if (error) throw error;
+                            if (!response.ok) throw new Error('Error al enviar formulario');
                             
                             leadForm.reset();
                             msg.className = 'text-xs text-center font-bold mt-2 p-2 rounded bg-green-100 text-green-800';

@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <th class="p-4 border-b font-bold">Fecha</th>
                             <th class="p-4 border-b font-bold">Cliente</th>
                             <th class="p-4 border-b font-bold">Vehículo Interés</th>
-                            <th class="p-4 border-b font-bold">Estado</th>
+                            <th class="p-4 border-b font-bold">Estado / Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -333,11 +333,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             <a href="https://wa.me/${lead.phone.replace(/[^0-9]/g, '')}?text=Hola ${lead.name}, te contacto de Urquijo Automotores por tu consulta sobre el ${carName}." target="_blank" class="text-accent-500 hover:text-accent-600 font-medium text-sm inline-flex items-center mt-1"><i class="fab fa-whatsapp mr-1"></i>${lead.phone}</a>
                         </td>
                         <td class="p-4 font-medium text-gray-700">${carName}</td>
-                        <td class="p-4">
+                        <td class="p-4 flex gap-2 items-center">
                             <select onchange="updateLeadStatus(${lead.id}, this.value)" class="p-1.5 rounded-lg text-sm font-bold ${statusColor} outline-none cursor-pointer">
                                 <option value="Pendiente" ${lead.status === 'Pendiente' ? 'selected' : ''}>🔴 Pendiente</option>
                                 <option value="Contactado" ${lead.status === 'Contactado' ? 'selected' : ''}>🟢 Contactado</option>
                             </select>
+                            <button onclick="deleteLead(${lead.id})" class="text-gray-400 hover:text-red-500 transition-colors p-2" title="Eliminar contacto">
+                                <i class="fas fa-trash-alt text-lg"></i>
+                            </button>
                         </td>
                     </tr>
                 `;
@@ -352,15 +355,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Actualizar estado del lead
+    // Actualizar estado del lead o eliminar si es Contactado
     window.updateLeadStatus = async function(id, newStatus) {
         try {
-            const { error } = await window.supabaseClient.from('leads').update({ status: newStatus }).eq('id', id);
-            if (error) throw error;
+            if (newStatus === 'Contactado') {
+                const { error } = await window.supabaseClient.from('leads').delete().eq('id', id);
+                if (error) throw error;
+            } else {
+                const { error } = await window.supabaseClient.from('leads').update({ status: newStatus }).eq('id', id);
+                if (error) throw error;
+            }
             loadLeads();
             loadDashboardStats();
         } catch (error) {
             alert('Error al actualizar cliente: ' + error.message);
+        }
+    };
+
+    // Eliminar lead manualmente
+    window.deleteLead = async function(id) {
+        if (!confirm('¿Seguro que quieres eliminar este contacto permanentemente?')) return;
+        try {
+            const { error } = await window.supabaseClient.from('leads').delete().eq('id', id);
+            if (error) throw error;
+            loadLeads();
+            loadDashboardStats();
+        } catch (error) {
+            alert('Error al eliminar cliente: ' + error.message);
         }
     };
 
