@@ -254,6 +254,7 @@ function filterInventory() {
     const maxKm = kmSelect ? (kmSelect.value === 'Cualquiera' ? 9999999 : parseInt(kmSelect.value)) : 9999999;
     
     const favs = getFavorites();
+    const currentTab = window.currentInventoryTab || 'disponibles';
 
     // Mostrar Skeletons
     inventoryGrid.innerHTML = Array(6).fill(`
@@ -269,7 +270,8 @@ function filterInventory() {
     inventoryGrid.style.opacity = '1';
 
     setTimeout(() => {
-        const filteredCars = inventoryData.filter(car => {
+        const sourceData = window.inventoryData || [];
+        const filteredCars = sourceData.filter(car => {
             const matchesSearch = (car.brand + ' ' + car.model + ' ' + car.trim).toLowerCase().includes(searchTerm);
             const matchesCondition = condition === 'Todos' || car.condition === condition;
             const matchesBrand = brand === 'Todas' || car.brand === brand;
@@ -280,8 +282,12 @@ function filterInventory() {
             const matchesKm = carKm <= maxKm;
 
             const matchesFav = window.showFavoritesOnly ? favs.includes(car.id) : true;
+            
+            // Filtro por pestaña
+            const isVendido = car.status && car.status.trim().toLowerCase() === 'vendido';
+            const matchesTab = currentTab === 'vendidos' ? isVendido : !isVendido;
 
-            return matchesSearch && matchesCondition && matchesBrand && matchesYear && matchesKm && matchesFav;
+            return matchesSearch && matchesCondition && matchesBrand && matchesYear && matchesKm && matchesFav && matchesTab;
         });
 
         currentCars = filteredCars;
@@ -307,6 +313,27 @@ window.clearFilters = function () {
     }
     filterInventory();
 }
+
+window.currentInventoryTab = 'disponibles';
+
+window.setInventoryTab = function(tab) {
+    window.currentInventoryTab = tab;
+    
+    const btnDisp = document.getElementById('tab-disponibles');
+    const btnVend = document.getElementById('tab-vendidos');
+    
+    if (btnDisp && btnVend) {
+        if (tab === 'disponibles') {
+            btnDisp.className = "tab-btn bg-accent-500 text-white px-8 py-3 rounded-xl font-bold shadow-lg transition-all";
+            btnVend.className = "tab-btn bg-brand-800 text-gray-300 hover:text-white px-8 py-3 rounded-xl font-bold transition-all hover:bg-brand-700";
+        } else {
+            btnVend.className = "tab-btn bg-accent-500 text-white px-8 py-3 rounded-xl font-bold shadow-lg transition-all";
+            btnDisp.className = "tab-btn bg-brand-800 text-gray-300 hover:text-white px-8 py-3 rounded-xl font-bold transition-all hover:bg-brand-700";
+        }
+    }
+    
+    filterInventory();
+};
 
 // Event Listeners for Filtering
 if (searchInput) searchInput.addEventListener('input', filterInventory);
@@ -368,9 +395,10 @@ if (loadMoreBtn) {
 }
 
 // Populate Brand Select and Year Select
-if (typeof inventoryData !== 'undefined') {
+function populateFilters(data) {
     if (brandSelect) {
-        const uniqueBrands = [...new Set(inventoryData.map(car => car.brand))].sort();
+        const uniqueBrands = [...new Set(data.map(car => car.brand))].sort();
+        brandSelect.innerHTML = '<option value="Todas">Todas</option>';
         uniqueBrands.forEach(brand => {
             const option = document.createElement('option');
             option.value = brand;
@@ -380,7 +408,8 @@ if (typeof inventoryData !== 'undefined') {
     }
 
     if (yearSelect) {
-        const uniqueYears = [...new Set(inventoryData.map(car => car.year))].sort((a, b) => b - a);
+        const uniqueYears = [...new Set(data.map(car => car.year))].sort((a, b) => b - a);
+        yearSelect.innerHTML = '<option value="Cualquiera">Cualquiera</option>';
         uniqueYears.forEach(year => {
             const option = document.createElement('option');
             option.value = year;
@@ -562,14 +591,14 @@ if (inventoryGrid) {
                 
             if (error) throw error;
             
-            currentCars = data || [];
+            window.inventoryData = data || [];
             
             // Re-populate filters if the functions exist
             if (typeof populateFilters === 'function') {
-                populateFilters(currentCars);
+                populateFilters(window.inventoryData);
             }
             
-            renderInventory(currentCars);
+            filterInventory(); // Use filterInventory instead of renderInventory to apply initial tab filter
         } catch (error) {
             console.error('Error cargando autos:', error);
             inventoryGrid.innerHTML = `
